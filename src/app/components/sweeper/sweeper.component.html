@@ -8,7 +8,7 @@
         This lets you collect all funds from all accounts in a given wallet and transfer them to any destination.
       </p>
       <p>
-        Could be used to load a paper wallet into some of your existing accounts, transfer a wallet or even empty your existing Nault wallet and transfer it somewhere else.
+        Could be used to load a paper wallet into some of your existing accounts, transfer a wallet or even empty your existing KIZUNANO WALLET and transfer it somewhere else.
       </p>
       <p>
         Even a mnemonic from a Ledger hardware wallet or other multicurrency wallets using BIP39/44 can be recovered using this tool.
@@ -29,7 +29,7 @@
                   <div uk-grid>
                     <div class="uk-width-1-1">
                       <div class="uk-inline uk-width-1-1">
-                        <input [(ngModel)]="sourceWallet" class="uk-input uk-margin-small-bottom {{validSeed ? '':'uk-form-danger'}}" id="source-wallet" type="text" (ngModelChange)="seedChange(sourceWallet)" placeholder="Nano seed, BIP39 seed, private key or 12,15,18,21,24-word mnemonic" autocomplete="off">
+                        <input [(ngModel)]="sourceWallet" class="uk-input uk-margin-small-bottom {{validSeed ? '':'uk-form-danger'}}" id="source-wallet" type="text" (ngModelChange)="seedChange(sourceWallet)" placeholder="KIZUNANO COIN seed, BIP39 seed, private key or 12,15,18,21,24-word mnemonic" autocomplete="off">
                       </div>
                     </div>
                   </div>
@@ -41,7 +41,7 @@
           <div class="uk-width-1-1 narrow-div">
             <div class="uk-form-horizontal">
               <div class="uk-margin">
-                <label class="uk-form-label" for="destination-account">Local Destination<span uk-icon="icon: info;" uk-tooltip title="Local accounts that can be used as destination for the swept funds. Make sure you are able to unlock your Nault wallet."></span></label>
+                <label class="uk-form-label" for="destination-account">Local Destination<span uk-icon="icon: info;" uk-tooltip title="Local accounts that can be used as destination for the swept funds. Make sure you are able to unlock your KIZUNANO WALLET."></span></label>
                 <div class="uk-form-controls">
                   <select class="uk-select" id="destination-account" [(ngModel)]="myAccountModel" (change)="setDestination(myAccountModel)">
                     <option *ngFor="let account of accounts" [value]="account.id">{{account.addressBookName ? account.addressBookName + ' - ' : '#' + account.index + ' - ' }} {{ account.id | squeeze }} ({{ account.balance | rai: settings.settings.displayDenomination }})</option>
@@ -60,7 +60,7 @@
                   <div uk-grid>
                     <div class="uk-width-1-1">
                       <div class="uk-inline uk-width-1-1">
-                        <input [(ngModel)]="destinationAccount" class="uk-input uk-margin-small-bottom {{validDestination ? '':'uk-form-danger'}}" id="custom-destination" type="text" (ngModelChange)="destinationChange(destinationAccount)" placeholder="nano_abc..123">
+                        <input [(ngModel)]="destinationAccount" class="uk-input uk-margin-small-bottom {{validDestination ? '':'uk-form-danger'}}" id="custom-destination" type="text" (ngModelChange)="destinationChange(destinationAccount)" placeholder="kizn_abc..123">
                       </div>
                     </div>
                   </div>

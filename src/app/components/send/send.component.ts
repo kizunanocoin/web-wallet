@@ -22,7 +22,7 @@ const nacl = window['nacl'];
   styleUrls: ['./send.component.css']
 })
 export class SendComponent implements OnInit {
-  nano = 1000000000000000000000000;
+  nano = 1000000;
 
   activePanel = 'send';
 
@@ -32,7 +32,7 @@ export class SendComponent implements OnInit {
   addressBookMatch = '';
 
   amounts = [
-    { name: 'NANO', shortName: 'NANO', value: 'mnano' },
+    { name: 'KIZN', shortName: 'KIZN', value: 'mnano' },
     { name: 'knano', shortName: 'knano', value: 'knano' },
     { name: 'nano', shortName: 'nano', value: 'nano' },
   ];
@@ -191,7 +191,7 @@ export class SendComponent implements OnInit {
 
     this.addressBookMatch = this.addressBookService.getAccountName(this.toAccountID);
     if (!this.addressBookMatch && this.toAccountID === environment.donationAddress) {
-      this.addressBookMatch = 'Nault Donations';
+      this.addressBookMatch = 'KIZUNANO WALLET Donations';
     }
 
     // const accountInfo = await this.walletService.walletApi.accountInfo(this.toAccountID);
@@ -230,7 +230,7 @@ export class SendComponent implements OnInit {
       return this.notificationService.sendWarning(`From and to account are required`);
     }
     if (!this.validateAmount()) {
-      return this.notificationService.sendWarning(`Invalid NANO Amount`);
+      return this.notificationService.sendWarning(`Invalid KIZN Amount`);
     }
 
     const from = await this.nodeApi.accountInfo(this.fromAccountID);
@@ -254,7 +254,7 @@ export class SendComponent implements OnInit {
       return this.notificationService.sendWarning(`Amount is invalid`);
     }
     if (from.balanceBN.minus(rawAmount).lessThan(0)) {
-      return this.notificationService.sendError(`From account does not have enough NANO`);
+      return this.notificationService.sendError(`From account does not have enough KIZN`);
     }
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered

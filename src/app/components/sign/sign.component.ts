@@ -12,7 +12,7 @@ import {NanoBlockService} from '../../services/nano-block.service';
 import {ApiService} from '../../services/api.service';
 import * as QRCode from 'qrcode';
 import * as bip39 from 'bip39';
-import * as bip39Wallet from 'nanocurrency-web';
+import * as bip39Wallet from 'kizunanocoin-web';
 import { QrModalService } from '../../services/qr-modal.service';
 
 const INDEX_MAX = 4294967295;
@@ -239,7 +239,7 @@ export class SignComponent implements OnInit {
     switch (this.signTypeSelected) {
       // wallet
       case this.signTypes[0]:
-        this.walletAccount = this.accounts.find(a => a.id.replace('xrb_', 'nano_') === this.signatureAccount);
+        this.walletAccount = this.accounts.find(a => a.id.replace('kiz_', 'kizn_') === this.signatureAccount);
         if (!this.walletAccount) {
           return this.signatureMessage = 'Could not find a matching wallet account to sign with. Make sure it\'s added under your accounts';
         } else {
@@ -293,9 +293,9 @@ export class SignComponent implements OnInit {
     }
 
     if (this.txType === TxType.send || this.txType === TxType.change) {
-      this.signatureAccount = this.fromAccountID.replace('xrb_', 'nano_').toLowerCase();
+      this.signatureAccount = this.fromAccountID.replace('kiz_', 'kizn_').toLowerCase();
     } else if (this.txType === TxType.receive || this.txType === TxType.open) {
-      this.signatureAccount = this.toAccountID.replace('xrb_', 'nano_').toLowerCase();
+      this.signatureAccount = this.toAccountID.replace('kiz_', 'kizn_').toLowerCase();
     }
 
     if (this.shouldSign) {
@@ -515,7 +515,7 @@ export class SignComponent implements OnInit {
     }
 
     // nano seed
-    if (keyType === 'nano_seed' || seed !== '' || keyType === 'bip39_seed') {
+    if (keyType === 'kizn_seed' || seed !== '' || keyType === 'bip39_seed') {
       if (seed === '') { // seed from input, no mnemonic
         seed = input;
       }
@@ -559,7 +559,7 @@ export class SignComponent implements OnInit {
     // validate nano seed
     if (key.length === 64) {
       if (this.util.nano.isValidSeed(key)) {
-        return 'nano_seed';
+        return 'kizn_seed';
       }
     }
     // validate bip39 seed

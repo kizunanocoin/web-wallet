@@ -147,20 +147,20 @@ function getApplicationMenu() {
       submenu: [
         {
           label: 'View GitHub',
-          click () { loadExternal('https://github.com/Nault/Nault'); }
+          click () { loadExternal('https://github.com/kizunanocoin/web-wallet'); }
         },
         {
           label: 'Submit Issue',
-          click () { loadExternal('https://github.com/Nault/Nault/issues/new'); }
+          click () { loadExternal('https://github.com/kizunanocoin/web-wallet/issues/new'); }
         },
         {type: 'separator'},
         {
           type: 'normal',
-          label: `Nault Version: ${autoUpdater.currentVersion}`,
+          label: `KIZUNANO WALLET Version: ${autoUpdater.currentVersion}`,
         },
         {
           label: 'View Latest Updates',
-          click () { loadExternal('https://github.com/Nault/Nault/releases'); }
+          click () { loadExternal('https://github.com/kizunanocoin/web-wallet/releases'); }
         },
         {type: 'separator'},
         {
@@ -175,7 +175,7 @@ function getApplicationMenu() {
 
   if (process.platform === 'darwin') {
     template.unshift({
-      label: 'Nault',
+      label: 'KIZUNANO WALLET',
       submenu: [
         {role: 'about'},
         {type: 'separator'},

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UtilService} from '../../services/util.service';
 import {AppSettingsService} from '../../services/app-settings.service';
-import * as nanocurrency from 'nanocurrency';
+import * as kizunanocoin from 'kizunanocoin';
 import {PriceService} from '../../services/price.service';
 import { BigNumber } from 'bignumber.js';
 import {NotificationService} from '../../services/notification.service';
@@ -48,7 +48,7 @@ export class ConverterComponent implements OnInit, OnDestroy {
     switch (unit) {
       case 'mnano':
         if (this.util.account.isValidNanoAmount(this.Mnano)) {
-          this.raw = nanocurrency.convert(this.Mnano, {from: nanocurrency.Unit.NANO, to: nanocurrency.Unit.raw});
+          this.raw = kizunanocoin.convert(this.Mnano, {from: kizunanocoin.Unit.NANO, to: kizunanocoin.Unit.raw});
           this.fiatPrice = (new BigNumber(this.Mnano)).times(this.price.price.lastPrice).toString(10);
           this.invalidMnano = false;
           this.invalidRaw = false;
@@ -61,7 +61,7 @@ export class ConverterComponent implements OnInit, OnDestroy {
         break;
       case 'raw':
         if (this.util.account.isValidAmount(this.raw)) {
-          this.Mnano = nanocurrency.convert(this.raw, {from: nanocurrency.Unit.raw, to: nanocurrency.Unit.NANO});
+          this.Mnano = kizunanocoin.convert(this.raw, {from: kizunanocoin.Unit.raw, to: kizunanocoin.Unit.NANO});
           this.fiatPrice = (new BigNumber(this.Mnano)).times(this.price.price.lastPrice).toString(10);
           this.invalidRaw = false;
           this.invalidMnano = false;
@@ -75,7 +75,7 @@ export class ConverterComponent implements OnInit, OnDestroy {
       case 'fiat':
         if (this.util.string.isNumeric(this.fiatPrice)) {
           this.Mnano = (new BigNumber(this.fiatPrice)).dividedBy(this.price.price.lastPrice).toString(10);
-          this.raw = nanocurrency.convert(this.Mnano, {from: nanocurrency.Unit.NANO, to: nanocurrency.Unit.raw});
+          this.raw = kizunanocoin.convert(this.Mnano, {from: kizunanocoin.Unit.NANO, to: kizunanocoin.Unit.raw});
           this.invalidRaw = false;
           this.invalidMnano = false;
           this.invalidFiat = false;

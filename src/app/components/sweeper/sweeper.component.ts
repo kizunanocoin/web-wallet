@@ -7,8 +7,8 @@ import {UtilService, TxType} from '../../services/util.service';
 import {WorkPoolService} from '../../services/work-pool.service';
 import {AppSettingsService} from '../../services/app-settings.service';
 import {NanoBlockService} from '../../services/nano-block.service';
-import * as nanocurrency from 'nanocurrency';
-import { wallet } from 'nanocurrency-web';
+import * as kizunanocoin from 'kizunanocoin';
+import { wallet } from 'kizunanocoin-web';
 import * as bip39 from 'bip39';
 import {Router} from '@angular/router';
 
@@ -140,7 +140,7 @@ export class SweeperComponent implements OnInit {
   }
 
   destinationChange(address) {
-    if (nanocurrency.checkAddress(address)) {
+    if (kizunanocoin.checkAddress(address)) {
       this.validDestination = true;
     } else {
       this.validDestination = false;
@@ -151,7 +151,7 @@ export class SweeperComponent implements OnInit {
     let invalid = false;
     if (this.util.string.isNumeric(index) && index % 1 === 0) {
       index = parseInt(index, 10);
-      if (!nanocurrency.checkIndex(index)) {
+      if (!kizunanocoin.checkIndex(index)) {
         invalid = true;
       }
       if (index > INDEX_MAX) {
@@ -177,7 +177,7 @@ export class SweeperComponent implements OnInit {
     let invalid = false;
     if (this.util.string.isNumeric(index) && index % 1 === 0) {
       index = parseInt(index, 10);
-      if (!nanocurrency.checkIndex(index)) {
+      if (!kizunanocoin.checkIndex(index)) {
         invalid = true;
       }
       if (index > INDEX_MAX) {
@@ -218,8 +218,8 @@ export class SweeperComponent implements OnInit {
   checkMasterKey(key) {
     // validate nano seed or private key
     if (key.length === 64) {
-      if (nanocurrency.checkSeed(key)) {
-        return 'nano_seed';
+      if (kizunanocoin.checkSeed(key)) {
+        return 'kizn_seed';
       }
     }
     // validate bip39 seed
@@ -248,19 +248,19 @@ export class SweeperComponent implements OnInit {
 
   // Process final send block
   async processSend(privKey, previous, sendCallback) {
-    const pubKey = nanocurrency.derivePublicKey(privKey);
-    const address = nanocurrency.deriveAddress(pubKey, {useNanoPrefix: true});
+    const pubKey = kizunanocoin.derivePublicKey(privKey);
+    const address = kizunanocoin.deriveAddress(pubKey, {useNanoPrefix: true});
 
     // make an extra check on valid destination
-    if (this.validDestination && nanocurrency.checkAddress(this.destinationAccount)) {
+    if (this.validDestination && kizunanocoin.checkAddress(this.destinationAccount)) {
       this.appendLog('Transfer started: ' + address);
       const work = await this.workPool.getWork(previous);
       // create the block with the work found
-      const block = nanocurrency.createBlock(privKey, {balance: '0', representative: this.representative,
+      const block = kizunanocoin.createBlock(privKey, {balance: '0', representative: this.representative,
       work: work, link: this.destinationAccount, previous: previous});
       // replace xrb with nano (old library)
-      block.block.account = block.block.account.replace('xrb', 'nano');
-      block.block.link_as_account = block.block.link_as_account.replace('xrb', 'nano');
+      block.block.account = block.block.account.replace('kiz', 'kizn');
+      block.block.link_as_account = block.block.link_as_account.replace('kiz', 'kizn');
 
       // publish block for each iteration
       const data = await this.api.process(block.block, TxType.send);
@@ -272,8 +272,8 @@ export class SweeperComponent implements OnInit {
           this.totalSwept = this.util.big.add(this.totalSwept, nanoAmountSent);
         }
         this.notificationService.sendInfo('Account ' + address + ' was swept and ' +
-        (nanoAmountSent ? (nanoAmountSent.toString(10) + ' Nano') : '') + ' transferred to ' + this.destinationAccount, {length: 15000});
-        this.appendLog('Funds transferred ' + (nanoAmountSent ? ('(' + nanoAmountSent.toString(10) + ' Nano)') : '') + ': ' + data.hash);
+        (nanoAmountSent ? (nanoAmountSent.toString(10) + ' KIZN') : '') + ' transferred to ' + this.destinationAccount, {length: 15000});
+        this.appendLog('Funds transferred ' + (nanoAmountSent ? ('(' + nanoAmountSent.toString(10) + ' KIZN)') : '') + ': ' + data.hash);
         console.log(this.adjustedBalance + ' raw transferred to ' + this.destinationAccount);
       } else {
         this.notificationService.sendWarning(`Failed processing block.`);
@@ -306,11 +306,11 @@ export class SweeperComponent implements OnInit {
       }
       const work = await this.workPool.getWork(workInputHash);
       // create the block with the work found
-      const block = nanocurrency.createBlock(this.privKey, {balance: this.adjustedBalance, representative: this.representative,
+      const block = kizunanocoin.createBlock(this.privKey, {balance: this.adjustedBalance, representative: this.representative,
       work: work, link: key, previous: this.previous});
       // replace xrb with nano (old library)
-      block.block.account = block.block.account.replace('xrb', 'nano');
-      block.block.link_as_account = block.block.link_as_account.replace('xrb', 'nano');
+      block.block.account = block.block.account.replace('kiz', 'kizn');
+      block.block.link_as_account = block.block.link_as_account.replace('kiz', 'kizn');
       // new previous
       this.previous = block.hash;
 
@@ -380,7 +380,7 @@ export class SweeperComponent implements OnInit {
       }.bind(this));
       const nanoAmount = this.util.nano.rawToMnano(raw);
       const pending = {count: Object.keys(data.blocks).length, raw: raw, NANO: nanoAmount, blocks: data.blocks};
-      const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' NANO';
+      const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' KIZN';
       this.appendLog(row);
 
       // create receive blocks for all pending
@@ -409,8 +409,8 @@ export class SweeperComponent implements OnInit {
       return;
     }
 
-    this.pubKey = nanocurrency.derivePublicKey(privKey);
-    const address = nanocurrency.deriveAddress(this.pubKey, {useNanoPrefix: true});
+    this.pubKey = kizunanocoin.derivePublicKey(privKey);
+    const address = kizunanocoin.deriveAddress(this.pubKey, {useNanoPrefix: true});
 
     // get account info required to build the block
     let balance = 0; // balance will be 0 if open block
@@ -469,8 +469,8 @@ export class SweeperComponent implements OnInit {
       } else {
         // all private keys have been processed
         this.appendLog('Finished processing all accounts');
-        this.appendLog(this.totalSwept + ' Nano transferred');
-        this.notificationService.sendInfo('Finished processing all accounts. ' + this.totalSwept + ' Nano transferred', {length: 0});
+        this.appendLog(this.totalSwept + ' KIZN transferred');
+        this.notificationService.sendInfo('Finished processing all accounts. ' + this.totalSwept + ' KIZN transferred', {length: 0});
         this.sweeping = false;
       }
     }.bind(this));
@@ -497,7 +497,7 @@ export class SweeperComponent implements OnInit {
       }
 
       // nano seed or private key
-      if (keyType === 'nano_seed' || seed !== '' || keyType === 'bip39_seed') {
+      if (keyType === 'kizn_seed' || seed !== '' || keyType === 'bip39_seed') {
         // check if a private key first (no index)
         this.appendLog('Checking if input is a private key');
         if (seed === '') { // seed from input, no mnemonic
@@ -509,7 +509,7 @@ export class SweeperComponent implements OnInit {
           // start with blake2b derivation (but not if the mnemonic is anything other than 24 words)
           if (keyType !== 'bip39_seed' && seed.length === 64) {
             for (let i = parseInt(this.startIndex, 10); i <= parseInt(this.endIndex, 10); i++) {
-              privKey = nanocurrency.deriveSecretKey(seed, i);
+              privKey = kizunanocoin.deriveSecretKey(seed, i);
               privKeys.push([privKey, 'blake2b', i]);
             }
           }

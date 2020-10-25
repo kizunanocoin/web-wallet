@@ -1,9 +1,9 @@
-# Nault Development
+# KIZUNANO WALLET Development
 
 ## Application Structure
 
-- [Nault](https://github.com/Nault/Nault) - The main wallet application (UI + Seed Generation/Block Signing/Etc).
-- Communication with the network is done via Nano RPC and Websocket protocols, private or public on any nano network.
+- [KIZUNANO WALLET](https://github.com/kizunanocoin/web-wallet) - The main wallet application (UI + Seed Generation/Block Signing/Etc).
+- Communication with the network is done via KIZUNANO COIN RPC and Websocket protocols, private or public on any KIZUNANO COIN network.
 
 ## Development Prerequisites
 - [NodeJS](https://nodejs.org) v12.x + NPM v6.x
@@ -12,8 +12,8 @@
 ## Development Guide
 #### Clone repository and install dependencies
 ```bash
-git clone https://github.com/Nault/Nault
-cd Nault
+git clone https://github.com/kizunanocoin/web-wallet
+cd web-wallet
 npm install
 ```
 

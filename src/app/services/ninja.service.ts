@@ -49,7 +49,8 @@ export class NinjaService {
   }
 
   async recommended(): Promise<any> {
-    return await this.request('accounts/verified');
+    return [];
+    //return await this.request('accounts/verified');
   }
 
   async recommendedRandomized(): Promise<any> {
@@ -64,7 +65,25 @@ export class NinjaService {
 
   // false - does not exist, null - any other error
   async getAccount(account: string): Promise<any> {
-    return await this.http.get(this.ninjaUrl + 'accounts/' + account).toPromise()
+    return {
+      "uptime_over": {
+        "day": 0,
+        "week": 0,
+        "month": 0,
+        "3_months": 0,
+        "6_months": 0,
+        "year": 0
+      },
+      "votingweight": 0,
+      "delegators": 0,
+      "votelatency": 0,
+      "verified": false,
+      "uptime": 0,
+      "score": 0,
+      "created": "2020-01-01T00:00:00.000Z",
+      "account": account
+    }
+    /*return await this.http.get(this.ninjaUrl + 'accounts/' + account).toPromise()
       .then(res => {
         return res;
       })
@@ -74,7 +93,7 @@ export class NinjaService {
         }
 
         return null;
-      });
+      });*/
   }
 
 }

@@ -81,7 +81,7 @@ export interface WalletApiAccount extends BaseApiAccount {
 
 @Injectable()
 export class WalletService {
-  nano = 1000000000000000000000000;
+  nano = 1000000;
   storeKey = `nanovault-wallet`;
 
   wallet: FullWallet = {
@@ -226,7 +226,7 @@ export class WalletService {
 
 
   async patchOldSavedData() {
-    // Look for saved accounts using an xrb_ prefix
+    // Look for saved accounts using an kiz_ prefix
     const walletData = localStorage.getItem(this.storeKey);
     if (!walletData) return;
 
@@ -234,8 +234,8 @@ export class WalletService {
 
     if (walletJson.accounts) {
       const newAccounts = walletJson.accounts.map(account => {
-        if (account.id.indexOf('xrb_') !== -1) {
-          account.id = account.id.replace('xrb_', 'nano_');
+        if (account.id.indexOf('kiz_') !== -1) {
+          account.id = account.id.replace('kiz_', 'kizn_');
         }
         return account;
       });
@@ -325,7 +325,7 @@ export class WalletService {
     const exportData = this.generateExportData();
     const base64Data = btoa(JSON.stringify(exportData));
 
-    return `https://nault.cc/import-wallet#${base64Data}`;
+    return `https://wallet.kizunanocoin.com/import-wallet#${base64Data}`;
   }
 
   lockWallet() {
@@ -419,7 +419,7 @@ export class WalletService {
 
         } else if (this.wallet.type === 'ledger') {
           const account: any = await this.ledgerService.getLedgerAccount(index);
-          accountAddress = account.address.replace('xrb_', 'nano_');
+          accountAddress = account.address.replace('kiz_', 'kizn_');
           accountPublicKey = account.publicKey.toUpperCase();
 
         } else {
@@ -517,7 +517,7 @@ export class WalletService {
     const account: any = await this.ledgerService.getLedgerAccount(index);
 
     const accountID = account.address;
-    const nanoAccountID = accountID.replace('xrb_', 'nano_');
+    const nanoAccountID = accountID.replace('kiz_', 'kizn_');
     const addressBookName = this.addressBook.getAccountName(nanoAccountID);
 
     const newAccount: WalletAccount = {

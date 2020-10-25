@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as blake from 'blakejs';
 import {BigNumber} from 'bignumber.js';
-import * as nanocurrency from 'nanocurrency';
+import * as kizunanocoin from 'kizunanocoin';
 
 const nacl = window['nacl'];
 const STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006';
@@ -282,7 +282,7 @@ function generateAccountKeyPair(accountSecretKeyBytes, expanded = false) {
   return nacl.sign.keyPair.fromSecretKey(accountSecretKeyBytes, expanded);
 }
 
-function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
+function getPublicAccountID(accountPublicKeyBytes, prefix = 'kizn') {
   const accountHex = util.uint8.toHex(accountPublicKeyBytes);
   const keyBytes = util.uint4.toUint8(util.hex.toUint4(accountHex)); // For some reason here we go from u, to hex, to 4, to 8??
   const checksum = util.uint5.toString(util.uint4.toUint5(util.uint8.toUint4(blake.blake2b(keyBytes, null, 5).reverse())));
@@ -292,7 +292,7 @@ function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
 }
 
 function isValidAccount(account: string): boolean {
-  return nanocurrency.checkAddress(account);
+  return kizunanocoin.checkAddress(account);
 }
 
 // Check if a string is a numeric and larger than 0 but less than Nano supply
@@ -300,7 +300,7 @@ function isValidNanoAmount(val: string) {
   // numerics and last character is not a dot and number of dots is 0 or 1
   const isnum = /^-?\d*\.?\d*$/.test(val);
   if (isnum && String(val).slice(-1) !== '.') {
-    if (val !== '' && mnanoToRaw(val).gte(1) && nanocurrency.checkAmount(mnanoToRaw(val).toString(10))) {
+    if (val !== '' && mnanoToRaw(val).gte(1) && kizunanocoin.checkAmount(mnanoToRaw(val).toString(10))) {
       return true;
     } else {
       return false;
@@ -312,7 +312,7 @@ function isValidNanoAmount(val: string) {
 
 // Check if valid raw amount
 function isValidAmount(val: string) {
-  return nanocurrency.checkAmount(val);
+  return kizunanocoin.checkAmount(val);
 }
 
 function getAccountPublicKey(account) {
@@ -321,7 +321,7 @@ function getAccountPublicKey(account) {
   }
   const account_crop = account.length === 64 ? account.substring(4, 64) : account.substring(5, 65);
   const isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop);
-  if (!isValid) throw new Error(`Invalid NANO account`);
+  if (!isValid) throw new Error(`Invalid KIZN account`);
 
   const key_uint4 = array_crop(uint5ToUint4(stringToUint5(account_crop.substring(0, 52))));
   const hash_uint4 = uint5ToUint4(stringToUint5(account_crop.substring(52, 60)));
@@ -333,20 +333,20 @@ function getAccountPublicKey(account) {
   return uint4ToHex(key_uint4);
 }
 
-function setPrefix(account, prefix = 'xrb') {
-  if (prefix === 'nano') {
-    return account.replace('xrb_', 'nano_');
+function setPrefix(account, prefix = 'kiz') {
+  if (prefix === 'kizn') {
+    return account.replace('kiz_', 'kizn_');
   } else {
-    return account.replace('nano_', 'xrb_');
+    return account.replace('kizn_', 'kiz_');
   }
 }
 
 /**
  * Conversion functions
  */
-const mnano = 1000000000000000000000000000000;
-const knano = 1000000000000000000000000000;
-const nano  = 1000000000000000000000000;
+const mnano = 1000000;
+const knano = 1000;
+const nano  = 1000000;
 function mnanoToRaw(value) {
   return new BigNumber(value).times(mnano);
 }
@@ -370,27 +370,27 @@ function rawToNano(value) {
  * Nano functions
  */
 function isValidSeed(val: string) {
-  return nanocurrency.checkSeed(val);
+  return kizunanocoin.checkSeed(val);
 }
 
 function isValidHash(val: string) {
-  return nanocurrency.checkHash(val);
+  return kizunanocoin.checkHash(val);
 }
 
 function isValidIndex(val: number) {
-  return nanocurrency.checkIndex(val);
+  return kizunanocoin.checkIndex(val);
 }
 
 function isValidSignature(val: string) {
-  return nanocurrency.checkSignature(val);
+  return kizunanocoin.checkSignature(val);
 }
 
 function isValidWork(val: string) {
-  return nanocurrency.checkWork(val);
+  return kizunanocoin.checkWork(val);
 }
 
 function validateWork(blockHash: string, threshold: string, work: string) {
-  return nanocurrency.validateWork({blockHash: blockHash, threshold: threshold, work: work});
+  return kizunanocoin.validateWork({blockHash: blockHash, threshold: threshold, work: work});
 }
 
 function hashStateBlock(block: StateBlock) {

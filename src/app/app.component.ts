@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
     this.windowHeight = window.innerHeight;
     this.settings.loadAppSettings();
 
-    // New for v19: Patch saved xrb_ prefixes to nano_
+    // New for v19: Patch saved kiz_ prefixes to kizn_
     await this.patchXrbToNanoPrefixData();
 
     this.addressBook.loadAddressBook();
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
 
     await this.walletService.reloadBalances(true);
 
-    // Workaround fix for github pages when Nault is refreshed (or externally linked) and there is a subpath for example to the send screen.
+    // Workaround fix for github pages when KIZUNANO WALLET is refreshed (or externally linked) and there is a subpath for example to the send screen.
     // This data is saved from the 404.html page
     const path = localStorage.getItem('path');
 
@@ -146,7 +146,7 @@ export class AppComponent implements OnInit {
     window.addEventListener('protocol-load', (e: CustomEvent) => {
       const protocolText = e.detail;
       const stripped = protocolText.split('').splice(4).join(''); // Remove xrb:
-      if (stripped.startsWith('xrb_')) {
+      if (stripped.startsWith('kiz_')) {
         this.router.navigate(['account', stripped]);
       }
       // Soon: Load seed, automatic send page?
@@ -169,19 +169,19 @@ export class AppComponent implements OnInit {
       if (!this.settings.settings.serverAPI) return;
       await this.updateFiatPrices();
     } catch (err) {
-      this.notifications.sendWarning(`There was an issue retrieving latest Nano price.  Ensure your AdBlocker is disabled on this page then reload to see accurate FIAT values.`, { length: 0, identifier: `price-adblock` });
+      this.notifications.sendWarning(`There was an issue retrieving latest KIZUNANO COIN price.  Ensure your AdBlocker is disabled on this page then reload to see accurate FIAT values.`, { length: 0, identifier: `price-adblock` });
     }
   }
 
   /*
-    This is important as it looks through saved data using hardcoded xrb_ prefixes
+    This is important as it looks through saved data using hardcoded kiz_ prefixes
     (Your wallet, address book, rep list, etc) and updates them to nano_ prefix for v19 RPC
    */
   async patchXrbToNanoPrefixData() {
     // If wallet is version 2, data has already been patched.  Otherwise, patch all data
     if (this.settings.settings.walletVersion >= 2) return;
 
-    await this.walletService.patchOldSavedData(); // Change saved xrb_ addresses to nano_
+    await this.walletService.patchOldSavedData(); // Change saved kiz_ addresses to nano_
     this.addressBook.patchXrbPrefixData();
     this.representative.patchXrbPrefixData();
 
@@ -219,12 +219,12 @@ export class AppComponent implements OnInit {
     const searchData = this.searchData.trim();
     if (!searchData.length) return;
 
-    if (searchData.startsWith('xrb_') || searchData.startsWith('nano_')) {
+    if (searchData.startsWith('kiz_') || searchData.startsWith('kizn_')) {
       this.router.navigate(['account', searchData]);
     } else if (searchData.length === 64) {
       this.router.navigate(['transaction', searchData]);
     } else {
-      this.notifications.sendWarning(`Invalid Nano account or transaction hash!`);
+      this.notifications.sendWarning(`Invalid KIZUNANO COIN account or transaction hash!`);
     }
     this.searchData = '';
   }
@@ -239,7 +239,7 @@ export class AppComponent implements OnInit {
       return;
     }
     this.walletService.reloadBalances(true);
-    this.notifications.sendInfo(`Attempting to reconnect to Nano node`);
+    this.notifications.sendInfo(`Attempting to reconnect to KIZUNANO COIN node`);
   }
 
   async updateFiatPrices() {

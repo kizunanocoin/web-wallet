@@ -266,11 +266,11 @@ export class LedgerService {
         try {
           this.ledger.nano = new Nano(this.ledger.transport);
         } catch (err) {
-          console.log(`Nano error: `, err);
+          console.log(`KIZUNANO COIN error: `, err);
           if (err.statusText === 'UNKNOWN_ERROR') {
             this.resetLedger();
           }
-          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Error loading Nano USB transport` });
+          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Error loading KIZUNANO COIN USB transport` });
           return resolve(false);
         }
       }
@@ -285,9 +285,9 @@ export class LedgerService {
         if (resolved) return;
         console.log(`Timeout expired, sending not connected`);
         this.ledger.status = LedgerStatus.NOT_CONNECTED;
-        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Unable to detect Nano Ledger application (Timeout)` });
+        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Unable to detect KIZUNANO COIN Ledger application (Timeout)` });
         if (!hideNotifications) {
-          this.notifications.sendWarning(`Unable to connect to the Ledger device.  Make sure it is unlocked and the Nano application is open`);
+          this.notifications.sendWarning(`Unable to connect to the Ledger device.  Make sure it is unlocked and KIZUNANO COIN application is open`);
         }
         resolved = true;
         return resolve(false);
@@ -301,7 +301,7 @@ export class LedgerService {
         if (!ledgerConfig) return resolve(false);
         if (ledgerConfig && ledgerConfig.version) {
           this.ledger.status = LedgerStatus.LOCKED;
-          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Nano app detected, but ledger is locked` });
+          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `KIZUNANO COIN app detected, but ledger is locked` });
         }
       } catch (err) {
         console.log(`App config error: `, err);
@@ -309,7 +309,7 @@ export class LedgerService {
           this.resetLedger();
         }
         if (!hideNotifications && !resolved) {
-          this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Nano application`);
+          this.notifications.sendWarning(`Ledger device locked.  Unlock and open KIZUNANO COIN application`);
         }
         return resolve(false);
       }
@@ -318,7 +318,7 @@ export class LedgerService {
       try {
         const accountDetails = await this.getLedgerAccount(0);
         this.ledger.status = LedgerStatus.READY;
-        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Nano Ledger application connected` });
+        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `KIZUNANO COIN Ledger application connected` });
 
         if (!this.pollingLedger) {
           this.pollingLedger = true;
@@ -328,7 +328,7 @@ export class LedgerService {
         console.log(`Error on account details: `, err);
         if (err.statusCode === STATUS_CODES.SECURITY_STATUS_NOT_SATISFIED) {
           if (!hideNotifications) {
-            this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Nano application`);
+            this.notifications.sendWarning(`Ledger device locked.  Unlock and open KIZUNANO COIN application`);
           }
         }
       }

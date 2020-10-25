@@ -19,7 +19,7 @@ import BigNumber from 'bignumber.js';
 
 
 export class ReceiveComponent implements OnInit {
-  nano = 1000000000000000000000000;
+  nano = 1000000;
   accounts = this.walletService.wallet.accounts;
   pendingBelowThreshold = [];
 
@@ -136,7 +136,7 @@ export class ReceiveComponent implements OnInit {
     const newBlock = await this.nanoBlock.generateReceive(walletAccount, sourceBlock, this.walletService.isLedgerWallet());
 
     if (newBlock) {
-      this.notificationService.sendSuccess(`Successfully received Nano!`);
+      this.notificationService.sendSuccess(`Successfully received KIZUNANO COIN!`);
       // clear the list of pending blocks. Updated again with reloadBalances()
       this.walletService.clearPendingBlocks();
     } else {

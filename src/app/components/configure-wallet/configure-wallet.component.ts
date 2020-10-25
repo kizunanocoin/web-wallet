@@ -5,7 +5,7 @@ import * as bip39 from 'bip39';
 import {LedgerService, LedgerStatus} from '../../services/ledger.service';
 import { QrModalService } from '../../services/qr-modal.service';
 import {UtilService} from '../../services/util.service';
-import { wallet } from 'nanocurrency-web';
+import { wallet } from 'kizunanocoin-web';
 
 enum panels {'create', 'import', 'password', 'backup', 'final'}
 const INDEX_MAX = 4294967295; // seed index
@@ -44,10 +44,10 @@ export class ConfigureWalletComponent implements OnInit {
 
   selectedImportOption = 'seed';
   importOptions = [
-    { name: 'Nano Seed', value: 'seed' },
-    { name: 'Nano Mnemonic Phrase', value: 'mnemonic' },
+    { name: 'KIZUNANO COIN Seed', value: 'seed' },
+    { name: 'KIZUNANO COIN Mnemonic Phrase', value: 'mnemonic' },
     { name: 'BIP39 Mnemonic Phrase', value: 'bip39-mnemonic' },
-    { name: 'Nault Wallet File', value: 'file' },
+    { name: 'KIZUNANO WALLET File', value: 'file' },
     { name: 'Ledger Nano S / Nano X', value: 'ledger' },
     { name: 'Private Key', value: 'privateKey' },
     { name: 'Expanded Private Key', value: 'expandedKey' },
@@ -124,7 +124,7 @@ export class ConfigureWalletComponent implements OnInit {
     }
 
     if (this.ledger.status === LedgerStatus.LOCKED) {
-      return this.notifications.sendWarning(`Unlock your ledger device and open the Nano app to continue`);
+      return this.notifications.sendWarning(`Unlock your ledger device and open the KIZUNANO COIN app to continue`);
     }
 
     if (refreshOnly) {
@@ -158,10 +158,10 @@ export class ConfigureWalletComponent implements OnInit {
 
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;"><span style="font-size: 18px;">You are about to create a new wallet<br>which will <b>reset the local Nault wallet you already have</b></span><br><br><b style="font-size: 18px;">Be sure you have saved your current Nano seed and/or mnemonic before continuing</b><br><br>Without a backup - <b>ALL FUNDS WILL BE UNRECOVERABLE</b><br/><br/></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;"><span style="font-size: 18px;">You are about to create a new wallet<br>which will <b>reset the local KIZUNANO WALLET you already have</b></span><br><br><b style="font-size: 18px;">Be sure you have saved your current KIZUNANO COIN seed and/or mnemonic before continuing</b><br><br>Without a backup - <b>ALL FUNDS WILL BE UNRECOVERABLE</b><br/><br/></p>');
       return true;
     } catch (err) {
-      this.notifications.sendInfo(`You can use the 'Manage Wallet' page to back up your Nano seed and/or mnemonic`);
+      this.notifications.sendInfo(`You can use the 'Manage Wallet' page to back up your KIZUNANO COIN seed and/or mnemonic`);
       return false;
     }
   }

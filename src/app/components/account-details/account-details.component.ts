@@ -12,7 +12,7 @@ import * as QRCode from 'qrcode';
 import BigNumber from 'bignumber.js';
 import {RepresentativeService} from '../../services/representative.service';
 import {BehaviorSubject} from 'rxjs';
-import * as nanocurrency from 'nanocurrency';
+import * as kizunanocoin from 'kizunanocoin';
 import {NinjaService} from '../../services/ninja.service';
 import { QrModalService } from '../../services/qr-modal.service';
 
@@ -22,7 +22,7 @@ import { QrModalService } from '../../services/qr-modal.service';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit, OnDestroy {
-  nano = 1000000000000000000000000;
+  nano = 1000000;
   zeroHash = '0000000000000000000000000000000000000000000000000000000000000000';
 
   accountHistory: any[] = [];
@@ -58,7 +58,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   showAddressBook = false;
   addressBookMatch = '';
   amounts = [
-    { name: 'NANO', shortName: 'NANO', value: 'mnano' },
+    { name: 'KIZN', shortName: 'KIZN', value: 'mnano' },
     { name: 'knano', shortName: 'knano', value: 'knano' },
     { name: 'nano', shortName: 'nano', value: 'nano' },
   ];
@@ -81,7 +81,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   blockHash = null;
   blockHashReceive = null;
   remoteVisible = false;
-  blockTypes: string[] = ['Send Nano', 'Change Representative'];
+  blockTypes: string[] = ['Send KIZUNANO COIN', 'Change Representative'];
   blockTypeSelected: string = this.blockTypes[0];
   representativeList = [];
   // End remote signing
@@ -525,7 +525,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const isValid = this.util.account.isValidAccount(this.toAccountID);
     if (!isValid) return this.notifications.sendWarning(`To account address is not valid`);
     if (!this.accountID || !this.toAccountID) return this.notifications.sendWarning(`From and to account are required`);
-    if (!this.validateAmount()) return this.notifications.sendWarning(`Invalid NANO Amount`);
+    if (!this.validateAmount()) return this.notifications.sendWarning(`Invalid KIZN Amount`);
 
     this.qrCodeImageBlock = null;
 
@@ -545,7 +545,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const nanoAmount = this.rawAmount.div(this.nano);
 
     if (this.amount < 0 || rawAmount.lessThan(0)) return this.notifications.sendWarning(`Amount is invalid`);
-    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough NANO`);
+    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough KIZN`);
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
     this.amountRaw = this.rawAmount.mod(this.nano);
@@ -559,13 +559,13 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const defaultRepresentative = this.settings.settings.defaultRepresentative || this.nanoBlock.getRandomRepresentative();
     const representative = from.representative || defaultRepresentative;
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('kiz_', 'kizn_').toLowerCase(),
       previous: from.frontier,
       representative: representative,
       balance: remainingDecimal,
       link: this.util.account.getAccountPublicKey(this.toAccountID),
     };
-    this.blockHash = nanocurrency.hashBlock({
+    this.blockHash = kizunanocoin.hashBlock({
       account: blockData.account,
       link: blockData.link,
       previous: blockData.previous,
@@ -580,7 +580,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
     const jsonBlock = JSON.parse(previousBlockInfo.contents);
     const blockDataPrevious = {
-      account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+      account: jsonBlock.account.replace('kiz_', 'kizn_').toLowerCase(),
       previous: jsonBlock.previous,
       representative: jsonBlock.representative,
       balance: jsonBlock.balance,
@@ -589,7 +589,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'kiznsign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }
@@ -617,14 +617,14 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const newBalanceDecimal = newBalance.toString(10);
 
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('kiz_', 'kizn_').toLowerCase(),
       previous: previousBlock,
       representative: representative,
       balance: newBalanceDecimal,
       link: pendingHash,
     };
 
-    this.blockHashReceive = nanocurrency.hashBlock({
+    this.blockHashReceive = kizunanocoin.hashBlock({
       account: blockData.account,
       link: blockData.link,
       previous: blockData.previous,
@@ -641,7 +641,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
       const jsonBlock = JSON.parse(previousBlockInfo.contents);
       blockDataPrevious = {
-        account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+        account: jsonBlock.account.replace('kiz_', 'kizn_').toLowerCase(),
         previous: jsonBlock.previous,
         representative: jsonBlock.representative,
         balance: jsonBlock.balance,
@@ -663,7 +663,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Nano signing standard
-    this.qrString = 'nanosign:' + JSON.stringify(qrData);
+    this.qrString = 'kiznsign:' + JSON.stringify(qrData);
 
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlockReceive = qrCode;
@@ -682,14 +682,14 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const balance = new BigNumber(account.balance);
     const balanceDecimal = balance.toString(10);
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('kiz_', 'kizn_').toLowerCase(),
       previous: account.frontier,
       representative: this.representativeModel,
       balance: balanceDecimal,
       link: this.zeroHash,
     };
 
-    this.blockHash = nanocurrency.hashBlock({
+    this.blockHash = kizunanocoin.hashBlock({
       account: blockData.account,
       link: blockData.link,
       previous: blockData.previous,
@@ -705,7 +705,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
     const jsonBlock = JSON.parse(previousBlockInfo.contents);
     const blockDataPrevious = {
-      account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+      account: jsonBlock.account.replace('kiz_', 'kizn_').toLowerCase(),
       previous: jsonBlock.previous,
       representative: jsonBlock.representative,
       balance: jsonBlock.balance,
@@ -714,7 +714,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'kiznsign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }

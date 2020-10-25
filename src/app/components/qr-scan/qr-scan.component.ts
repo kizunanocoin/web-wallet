@@ -57,7 +57,7 @@ export class QrScanComponent implements OnInit {
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
 
-    const nano_scheme = /^(nano|nanorep|nanoseed|nanokey|nanosign|nanoprocess|https):.+$/g;
+    const nano_scheme = /^(kizn|kiznrep|kiznseed|kiznkey|kiznsign|kiznprocess|https):.+$/g;
 
     if (this.util.account.isValidAccount(resultString)) {
       // Got address, routing to send...
@@ -80,7 +80,7 @@ export class QrScanComponent implements OnInit {
           // address book import
           this.router.navigate(['import-address-book'], { queryParams: {hostname: url.hostname}, fragment: url.hash.slice(1)});
         }
-      } else if (url.protocol === 'nano:' && this.util.account.isValidAccount(url.pathname)) {
+      } else if (url.protocol === 'kizn:' && this.util.account.isValidAccount(url.pathname)) {
         // Got address, routing to send...
         const amount = url.searchParams.get('amount');
         this.router.navigate(['send'], { queryParams: {
@@ -88,7 +88,7 @@ export class QrScanComponent implements OnInit {
           amount: amount ? this.util.nano.rawToMnano(amount) : null
         }});
 
-      } else if (url.protocol === 'nanorep:' && this.util.account.isValidAccount(url.pathname)) {
+      } else if (url.protocol === 'kiznrep:' && this.util.account.isValidAccount(url.pathname)) {
         // Representative change
         this.router.navigate(['representatives'], { queryParams: {
           hideOverview: true,
@@ -96,16 +96,16 @@ export class QrScanComponent implements OnInit {
           representative: url.pathname
         }});
 
-      } else if (url.protocol === 'nanoseed:' && this.util.nano.isValidSeed(url.pathname)) {
+      } else if (url.protocol === 'kiznseed:' && this.util.nano.isValidSeed(url.pathname)) {
         // Seed
         this.handleSeed(url.pathname);
-      } else if (url.protocol === 'nanokey:' && this.util.nano.isValidHash(url.pathname)) {
+      } else if (url.protocol === 'kiznkey:' && this.util.nano.isValidHash(url.pathname)) {
         // Private key
         this.handlePrivateKey(url.pathname);
-      } else if (url.protocol === 'nanosign:') {
+      } else if (url.protocol === 'kiznsign:') {
           this.remoteSignService.navigateSignBlock(url);
 
-      } else if (url.protocol === 'nanoprocess:') {
+      } else if (url.protocol === 'kiznprocess:') {
           this.remoteSignService.navigateProcessBlock(url);
       }
 

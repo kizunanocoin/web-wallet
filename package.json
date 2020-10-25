@@ -1,9 +1,9 @@
 {
-  "name": "nault",
+  "name": "kizunano-wallet",
   "version": "1.8.0",
   "license": "MIT",
-  "description": "Wallet for interacting with Nano",
-  "author": "The Nano Community / Andrew Steele",
+  "description": "Wallet for interacting with KIZUNANO COIN",
+  "author": "The KIZ Association (TKA)",
   "main": "desktop-app/dist/desktop-app.js",
   "scripts": {
     "ng": "ng",
@@ -53,8 +53,8 @@
     "crypto-js": "^3.1.9-1",
     "electron-updater": "^4.3.1",
     "hw-app-nano": "^1.3.0",
-    "nanocurrency": "^2.5.0",
-    "nanocurrency-web": "^1.2.1",
+    "kizunanocoin": "^2.5.0",
+    "kizunanocoin-web": "^1.2.1",
     "ngx-clipboard": "^12.3.0",
     "node-hid": "^1.3.0",
     "qrcode": "^1.4.4",
@@ -94,10 +94,10 @@
     "worker-loader": "^2.0.0"
   },
   "build": {
-    "appId": "cc.nault",
+    "appId": "com.kizunanocoin.wallet",
     "buildVersion": "1.6.1",
-    "productName": "Nault",
-    "copyright": "Copyright © 2020 The Nano Community / Andrew Steele",
+    "productName": "KIZUNANO WALLET",
+    "copyright": "Copyright © 2020 The KIZ Association (TKA)",
     "directories": {
       "output": "desktop-app/build",
       "buildResources": "desktop-app/assets",

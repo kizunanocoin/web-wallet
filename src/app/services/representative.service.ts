@@ -349,8 +349,8 @@ export class RepresentativeService {
     const list = JSON.parse(representativeStore);
 
     const newRepList = list.map(entry => {
-      if (entry.id.indexOf('xrb_') !== -1) {
-        entry.id = entry.id.replace('xrb_', 'nano_');
+      if (entry.id.indexOf('kiz_') !== -1) {
+        entry.id = entry.id.replace('kiz_', 'kizn_');
       }
       return entry;
     });
@@ -426,43 +426,23 @@ export class RepresentativeService {
   // tslint:disable-next-line:member-ordering
   defaultRepresentatives = [
     {
-      id: 'nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4',
-      name: 'Nano Foundation #1',
+      id: 'kizn_3ich3w78f3yow7fwu4rm84su3kcqroikjrr7o1a3nh6ixwdgjzpheuyi4eby',
+      name: 'The KIZ Association #1',
       warn: true,
     },
     {
-      id: 'nano_1stofnrxuz3cai7ze75o174bpm7scwj9jn3nxsn8ntzg784jf1gzn1jjdkou',
-      name: 'Nano Foundation #2',
+      id: 'kizn_1iqfe4r5pzxqcphzg6enh4fj8wjkmcjzrioidw79xjg94ij7b7o6sxu1h4ns',
+      name: 'The KIZ Association #2',
       warn: true,
     },
     {
-      id: 'nano_1q3hqecaw15cjt7thbtxu3pbzr1eihtzzpzxguoc37bj1wc5ffoh7w74gi6p',
-      name: 'Nano Foundation #3',
+      id: 'kizn_3npuyh63tu34xjyi76g1ksp3x1dtphmayw3z9sr1huaqbozknrapdi1d5g35',
+      name: 'The KIZ Association #3',
       warn: true,
     },
     {
-      id: 'nano_3dmtrrws3pocycmbqwawk6xs7446qxa36fcncush4s1pejk16ksbmakis78m',
-      name: 'Nano Foundation #4',
-      warn: true,
-    },
-    {
-      id: 'nano_3hd4ezdgsp15iemx7h81in7xz5tpxi43b6b41zn3qmwiuypankocw3awes5k',
-      name: 'Nano Foundation #5',
-      warn: true,
-    },
-    {
-      id: 'nano_1awsn43we17c1oshdru4azeqjz9wii41dy8npubm4rg11so7dx3jtqgoeahy',
-      name: 'Nano Foundation #6',
-      warn: true,
-    },
-    {
-      id: 'nano_1anrzcuwe64rwxzcco8dkhpyxpi8kd7zsjc1oeimpc3ppca4mrjtwnqposrs',
-      name: 'Nano Foundation #7',
-      warn: true,
-    },
-    {
-      id: 'nano_1hza3f7wiiqa7ig3jczyxj5yo86yegcmqk3criaz838j91sxcckpfhbhhra1',
-      name: 'Nano Foundation #8',
+      id: 'kizn_3wfui7bo9538nbn968q56hyip11yox4tjg98t8w36adggfap18ypfx367i97',
+      name: 'The KIZ Association #4',
       warn: true,
     },
   ];

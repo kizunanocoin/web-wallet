@@ -41,7 +41,7 @@ export class ConfigureAppComponent implements OnInit {
   wallet = this.walletService.wallet;
 
   denominations = [
-    { name: 'NANO', value: 'mnano' },
+    { name: 'KIZN', value: 'mnano' },
     { name: 'knano', value: 'knano' },
     { name: 'nano', value: 'nano' },
   ];
@@ -106,7 +106,7 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'Best Option Available', value: 'best' },
     { name: 'Client Side - WebGL [Recommended] (Chrome/Firefox)', value: 'clientWebGL' },
     { name: 'Client Side - CPU', value: 'clientCPU' },
-    { name: 'Server - Nault Server', value: 'server' },
+    { name: 'Server - KIZUNANO WALLET Server', value: 'server' },
   ];
   selectedPoWOption = this.powOptions[0].value;
 
@@ -118,8 +118,8 @@ export class ConfigureAppComponent implements OnInit {
   selectedPendingOption = this.pendingOptions[0].value;
 
   // prefixOptions = [
-  //   { name: 'xrb_', value: 'xrb' },
-  //   { name: 'nano_', value: 'nano' },
+  //   { name: 'kiz_', value: 'kiz' },
+  //   { name: 'kizn_', value: 'kizn' },
   // ];
   // selectedPrefix = this.prefixOptions[0].value;
 
@@ -445,7 +445,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearWalletData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in Nault!<br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in KIZUNANO WALLET!<br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
@@ -456,7 +456,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearAllData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all your data stored in Nault and reset all settings.<br>This includes all of your wallet data and address book!<br><br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all your data stored in KIZUNANO WALLET and reset all settings.<br>This includes all of your wallet data and address book!<br><br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
@@ -469,7 +469,7 @@ export class ConfigureAppComponent implements OnInit {
 
       this.notifications.sendSuccess(`Successfully deleted locally stored data and reset the settings!`);
 
-      // Get a new random API server or Nault will get stuck in offline mode
+      // Get a new random API server or KIZUNANO WALLET will get stuck in offline mode
       this.updateServerSettings();
     } catch (err) {}
   }
