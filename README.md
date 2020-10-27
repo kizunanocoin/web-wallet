@@ -49,6 +49,6 @@ Special thanks to the following!
 ## Donations
 
 If you have found KIZUNANO WALLET useful and are feeling generous, you can donate at
-`kizn_31oh1g739gh6gk4uisb75h7makxsy1xqyi3jckmkh8n6pegbphnswxoeyhrf`
+`kizn_1tahs8wx5xupc47kxna6dgn3m1jfiaxf5b3oz5dbbmk8cxi5sxjok7a5ta4k`
 
 Thanks a lot!

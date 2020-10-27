@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   desktop: false,
-  donationAddress: 'kizn_31oh1g739gh6gk4uisb75h7makxsy1xqyi3jckmkh8n6pegbphnswxoeyhrf',
+  donationAddress: 'kizn_1tahs8wx5xupc47kxna6dgn3m1jfiaxf5b3oz5dbbmk8cxi5sxjok7a5ta4k',
 };

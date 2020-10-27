@@ -13,11 +13,11 @@ const nacl = window['nacl'];
 @Injectable()
 export class NanoBlockService {
   representativeAccounts = [
-    'kizn_1mcik8bhddtqr45p7hup86sn3jzkwfhqs5ar8rab54qja4keabb1acdirtga',
-    'kizn_3ich3w78f3yow7fwu4rm84su3kcqroikjrr7o1a3nh6ixwdgjzpheuyi4eby',
-    'kizn_1iqfe4r5pzxqcphzg6enh4fj8wjkmcjzrioidw79xjg94ij7b7o6sxu1h4ns',
-    'kizn_3npuyh63tu34xjyi76g1ksp3x1dtphmayw3z9sr1huaqbozknrapdi1d5g35',
-    'kizn_3wfui7bo9538nbn968q56hyip11yox4tjg98t8w36adggfap18ypfx367i97',
+    'kizn_1e8a1is3cb8okj9k9yuim73mq46jrtnnsnhdtydpkb76apw9gyrjthbc4mso',
+    'kizn_3jottfzje496q53ipxy6zgkbheeg5ok1qzm93ggkpabw3aydj8nc3kcssjoy',
+    'kizn_1kmo3ndb6hfxzjm459zi8g4da3rm76endb65h9rjtqojoypq6it8d776w96d',
+    'kizn_1abnqj5paqjc8h9k5yba57d9nbebggyyy1kyctken3sqqxbyp1oombdm5jjd',
+    'kizn_3phmy7fguk7eun9ck8yeekhjnraokb1x1c996dq573euxehhjkawuhjmhsxb',
   ];
 
   zeroHash = '0000000000000000000000000000000000000000000000000000000000000000';
