@@ -3,7 +3,7 @@
   "version": "1.8.0",
   "license": "MIT",
   "description": "Wallet for interacting with KIZUNANO COIN",
-  "author": "The KIZ Association (TKA)",
+  "author": "THE KIZUNANO CORP. (TKC)",
   "main": "desktop-app/dist/desktop-app.js",
   "scripts": {
     "ng": "ng",
@@ -97,7 +97,7 @@
     "appId": "com.kizunanocoin.wallet",
     "buildVersion": "1.6.1",
     "productName": "KIZUNANO WALLET",
-    "copyright": "Copyright © 2020 The KIZ Association (TKA)",
+    "copyright": "Copyright © 2020 THE KIZUNANO CORP. (TKA)",
     "directories": {
       "output": "desktop-app/build",
       "buildResources": "desktop-app/assets",

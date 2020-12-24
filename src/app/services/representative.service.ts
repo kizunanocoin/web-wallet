@@ -427,27 +427,27 @@ export class RepresentativeService {
   defaultRepresentatives = [
     {
       id: 'kizn_1e8a1is3cb8okj9k9yuim73mq46jrtnnsnhdtydpkb76apw9gyrjthbc4mso',
-      name: 'The KIZ Association #1',
+      name: 'THE KIZUNANO CORPORATION #1',
       warn: false,
     },
     {
       id: 'kizn_3jottfzje496q53ipxy6zgkbheeg5ok1qzm93ggkpabw3aydj8nc3kcssjoy',
-      name: 'The KIZ Association #2',
+      name: 'THE KIZUNANO CORPORATION #2',
       warn: false,
     },
     {
       id: 'kizn_1kmo3ndb6hfxzjm459zi8g4da3rm76endb65h9rjtqojoypq6it8d776w96d',
-      name: 'The KIZ Association #3',
+      name: 'THE KIZUNANO CORPORATION #3',
       warn: false,
     },
     {
       id: 'kizn_1abnqj5paqjc8h9k5yba57d9nbebggyyy1kyctken3sqqxbyp1oombdm5jjd',
-      name: 'The KIZ Association #4',
+      name: 'THE KIZUNANO CORPORATION #4',
       warn: false,
     },
     {
       id: 'kizn_3phmy7fguk7eun9ck8yeekhjnraokb1x1c996dq573euxehhjkawuhjmhsxb',
-      name: 'The KIZ Association #5',
+      name: 'THE KIZUNANO CORPORATION #5',
       warn: false,
     },
   ];
