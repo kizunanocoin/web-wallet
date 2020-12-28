@@ -6,14 +6,14 @@
       <div class="uk-width-1-1">
         <div class="nav-button" (click)="toggleNav()" style="cursor: pointer;">
           <span uk-icon="icon: menu;"></span>
-          <span class="app-name">KIZUNANO WALLET</span>
+          <span class="app-name" translate>KIZUNANO WALLET</span>
         </div>
       </div>
     </div>
 
     <!-- Accounts dropdown -->
     <div #accountsDropdown [class]="[ 'accounts-dropdown', showAccountsDropdown ? 'visible' : 'hidden' ]">
-      <div class="header">Currently Selected</div>
+      <div class="header" translate>Currently Selected</div>
       <div class="account active" *ngIf="wallet.selectedAccount !== null"> <!-- active nano_ account -->
         <div class="name-column">
           <div class="name">{{ wallet.selectedAccount.addressBookName ? wallet.selectedAccount.addressBookName : ('Account #' + wallet.selectedAccount.index) }}</div>
@@ -26,7 +26,7 @@
       </div>
       <div [class]="[ 'account', (wallet.selectedAccount === null) ? 'active' : 'inactive' ]" (click)="selectAccount(null)"> <!-- active/inactive total balance -->
         <div class="name-column">
-          <div class="name">Total Balance</div>
+          <div class="name" translate>Total Balance</div>
           <div class="address"> </div>
         </div>
         <div class="balance-column">
@@ -77,7 +77,7 @@
                         ? wallet.selectedAccount.addressBookName
                         : ('Account #' + wallet.selectedAccount.index)
                       )
-                      : 'Total Balance'
+                      : 'Total Balance'|translate
                     }}</a>
                     <div #selectButton [class]="[ 'select-button', showAccountsDropdown ? 'open' : 'closed' ]" (click)="toggleAccountsDropdown()">
                       <div class="circle"></div>
@@ -172,7 +172,7 @@
                 </div>
               </div>
 
-              <app-change-rep-widget *ngIf="isConfigured()"></app-change-rep-widget>
+              <!--<app-change-rep-widget *ngIf="isConfigured()"></app-change-rep-widget>-->
               <app-wallet-widget></app-wallet-widget>
 
             </div>
@@ -181,13 +181,13 @@
         </div>
 
         <ul class="uk-nav uk-nav-default uk-nav-parent-icon left-nav" uk-nav>
-          <li><a routerLink="/accounts" routerLinkActive="active"><div class="label">Accounts</div></a></li>
-          <li><a routerLink="/send" routerLinkActive="active"><div class="label">Send</div></a></li>
+          <li><a routerLink="/accounts" routerLinkActive="active"><div class="label" translate>Accounts</div></a></li>
+          <li><a routerLink="/send" routerLinkActive="active"><div class="label" translate>Send</div></a></li>
           <li>
             <a routerLink="/receive" routerLinkActive="active">
               <div uk-grid>
                 <div class="uk-width-3-4">
-                  <div class="label">Receive</div>
+                  <div class="label" translate>Receive</div>
                 </div>
                 <div class="uk-width-1-4 uk-text-center label-new">
                   <span *ngIf="walletService.hasPendingTransactions()" class="uk-badge uk-text-top uk-align-center"><div class="label">New</div></span>
@@ -195,26 +195,26 @@
               </div>
             </a>
           </li>
-          <li><a routerLink="/address-book" routerLinkActive="active"><div class="label">Address Book</div></a></li>
-          <li><a routerLink="/qr-scan" routerLinkActive="active"><div class="label">Scan QR Code</div></a></li>
+          <li><a routerLink="/address-book" routerLinkActive="active"><div class="label" translate>Address Book</div></a></li>
+          <li><a routerLink="/qr-scan" routerLinkActive="active"><div class="label" translate>Scan QR Code</div></a></li>
           <li class="uk-parent">
-            <a href="#">Settings</a>
+            <a href="#" translate>Settings</a>
             <ul class="uk-nav-sub">
-              <li><a routerLink="/representatives" [queryParams]="" routerLinkActive="active"><div class="label">Representatives</div></a></li>
-              <li><a routerLink="/configure-app" routerLinkActive="active"><div class="label">App Settings</div></a></li>
-              <li><a routerLink="/manage-wallet" routerLinkActive="active"><div class="label">Manage Wallet</div></a></li>
-              <li><a routerLink="/configure-wallet" routerLinkActive="active"><div class="label">Configure New Wallet</div></a></li>
+              <!--<li><a routerLink="/representatives" [queryParams]="" routerLinkActive="active"><div class="label">Representatives</div></a></li>-->
+              <li><a routerLink="/configure-app" routerLinkActive="active"><div class="label" translate>App Settings</div></a></li>
+              <li><a routerLink="/manage-wallet" routerLinkActive="active"><div class="label" translate>Manage Wallet</div></a></li>
+              <li><a routerLink="/configure-wallet" routerLinkActive="active"><div class="label" translate>Configure New Wallet</div></a></li>
             </ul>
           </li>
-          <li class="uk-parent">
-            <a href="#">Advanced Tools</a>
-            <ul class="uk-nav-sub">
-              <li><a routerLink="/sweeper" routerLinkActive="active"><div class="label">Wallet Sweeper</div></a></li>
-              <li><a routerLink="/remote-signing" routerLinkActive="active"><div class="label">Remote Signing</div></a></li>
-              <li><a routerLink="/converter" routerLinkActive="active"><div class="label">Unit Converter</div></a></li>
-              <li><a routerLink="/qr-generator" routerLinkActive="active"><div class="label">QR Generator</div></a></li>
-            </ul>
-          </li>
+          <!--<li class="uk-parent">-->
+            <!--<a href="#">Advanced Tools</a>-->
+            <!--<ul class="uk-nav-sub">-->
+              <!--<li><a routerLink="/sweeper" routerLinkActive="active"><div class="label">Wallet Sweeper</div></a></li>-->
+              <!--<li><a routerLink="/remote-signing" routerLinkActive="active"><div class="label">Remote Signing</div></a></li>-->
+              <!--<li><a routerLink="/converter" routerLinkActive="active"><div class="label">Unit Converter</div></a></li>-->
+              <!--<li><a routerLink="/qr-generator" routerLinkActive="active"><div class="label">QR Generator</div></a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
         </ul>
 
         <div class="nav-search">

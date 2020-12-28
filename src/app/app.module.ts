@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {WelcomeComponent} from './welcome/welcome.component';
@@ -29,39 +29,48 @@ import {ConfigureAppComponent} from './components/configure-app/configure-app.co
 import {AppSettingsService} from './services/app-settings.service';
 import {WebsocketService} from './services/websocket.service';
 import {NanoBlockService} from './services/nano-block.service';
-import { AccountDetailsComponent } from './components/account-details/account-details.component';
-import { TransactionDetailsComponent } from './components/transaction-details/transaction-details.component';
+import {AccountDetailsComponent} from './components/account-details/account-details.component';
+import {TransactionDetailsComponent} from './components/transaction-details/transaction-details.component';
 import {PriceService} from './services/price.service';
-import { FiatPipe } from './pipes/fiat.pipe';
-import { AmountSplitPipe } from './pipes/amount-split.pipe';
-import { ImportWalletComponent } from './components/import-wallet/import-wallet.component';
-import { NanoAccountIdComponent } from './components/helpers/nano-account-id/nano-account-id.component';
+import {FiatPipe} from './pipes/fiat.pipe';
+import {AmountSplitPipe} from './pipes/amount-split.pipe';
+import {ImportWalletComponent} from './components/import-wallet/import-wallet.component';
+import {NanoAccountIdComponent} from './components/helpers/nano-account-id/nano-account-id.component';
 import {PowService} from './services/pow.service';
-import { ImportAddressBookComponent } from './components/import-address-book/import-address-book.component';
-import { CurrencySymbolPipe } from './pipes/currency-symbol.pipe';
-import { RepresentativesComponent } from './components/representatives/representatives.component';
+import {ImportAddressBookComponent} from './components/import-address-book/import-address-book.component';
+import {CurrencySymbolPipe} from './pipes/currency-symbol.pipe';
+import {RepresentativesComponent} from './components/representatives/representatives.component';
 import {RepresentativeService} from './services/representative.service';
 import {ManageRepresentativesComponent} from './components/manage-representatives/manage-representatives.component';
 import {NodeService} from './services/node.service';
 import {LedgerService} from './services/ledger.service';
 import {DesktopService} from './services/desktop.service';
-import { AccountPipe } from './pipes/account.pipe';
-import { ChangeRepWidgetComponent } from './components/change-rep-widget/change-rep-widget.component';
-import { SweeperComponent } from './components/sweeper/sweeper.component';
-import { QrScanComponent } from './components/qr-scan/qr-scan.component';
+import {AccountPipe} from './pipes/account.pipe';
+import {ChangeRepWidgetComponent} from './components/change-rep-widget/change-rep-widget.component';
+import {SweeperComponent} from './components/sweeper/sweeper.component';
+import {QrScanComponent} from './components/qr-scan/qr-scan.component';
 import {SignComponent} from './components/sign/sign.component';
 import {RemoteSigningComponent} from './components/remote-signing/remote-signing.component';
 import {RemoteSignService} from './services/remote-sign.service';
-import { QrModalComponent } from './components/qr-modal/qr-modal.component';
-import { QrModalService } from './services/qr-modal.service';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import {QrModalComponent} from './components/qr-modal/qr-modal.component';
+import {QrModalService} from './services/qr-modal.service';
+import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 
 // QR code module
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { NinjaService } from './services';
-import { ConverterComponent } from './components/converter/converter.component';
-import { QrGeneratorComponent } from './components/qr-generator/qr-generator.component';
+import {ZXingScannerModule} from '@zxing/ngx-scanner';
+import {NinjaService} from './services';
+import {ConverterComponent} from './components/converter/converter.component';
+import {QrGeneratorComponent} from './components/qr-generator/qr-generator.component';
+
+// i18n module
+import {HttpClient} from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -101,6 +110,13 @@ import { QrGeneratorComponent } from './components/qr-generator/qr-generator.com
   imports: [
     BrowserModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }), 
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

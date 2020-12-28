@@ -9,9 +9,9 @@ import {WorkPoolService} from './services/work-pool.service';
 import {Router} from '@angular/router';
 import {RepresentativeService} from './services/representative.service';
 import {NodeService} from './services/node.service';
-import { LedgerService } from './services';
-import { environment } from 'environments/environment';
-
+import {LedgerService} from './services';
+import {environment} from 'environments/environment';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private workPool: WorkPoolService,
     private ledger: LedgerService,
+    private translate: TranslateService,
     public price: PriceService) {
       router.events.subscribe(() => {
         this.navExpanded = false;
@@ -74,6 +75,8 @@ export class AppComponent implements OnInit {
 
     this.addressBook.loadAddressBook();
     this.workPool.loadWorkCache();
+    this.translate.setDefaultLang(this.settings.settings.displayLanguage);
+    this.translate.use(this.settings.settings.displayLanguage);
 
     await this.walletService.loadStoredWallet();
 

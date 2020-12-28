@@ -8,6 +8,7 @@ interface AppSettings {
   displayDenomination: string;
   // displayPrefix: string | null;
   walletStore: string;
+  displayLanguage: string;
   displayCurrency: string;
   defaultRepresentative: string | null;
   lockOnClose: number;
@@ -30,6 +31,7 @@ export class AppSettingsService {
     displayDenomination: 'mnano',
     // displayPrefix: 'xrb',
     walletStore: 'localStorage',
+    displayLanguage: 'en',
     displayCurrency: 'USD',
     defaultRepresentative: null,
     lockOnClose: 1,
@@ -139,6 +141,7 @@ export class AppSettingsService {
       displayDenomination: 'mnano',
       // displayPrefix: 'xrb',
       walletStore: 'localStorage',
+      displayLanguage: 'en',
       displayCurrency: 'USD',
       defaultRepresentative: null,
       lockOnClose: 1,

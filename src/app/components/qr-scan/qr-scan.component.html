@@ -1,7 +1,7 @@
 <div class="uk-animation-slide-left-small" uk-grid>
   <div class="uk-width-1-1">
 
-    <h2 class="uk-heading-divider">Scan QR Code</h2>
+    <h2 class="uk-heading-divider" translate>Scan QR Code</h2>
 
     <div uk-grid class="uk-margin-top">
 
@@ -11,10 +11,10 @@
           <div class="uk-form-horizontal">
 
             <div class="uk-margin">
-              <label class="uk-form-label">Device</label>
+              <label class="uk-form-label" translate>Device</label>
               <div class="uk-form-controls">
                 <select class="uk-select" (change)="onDeviceSelectChange($event.target.value)">
-                  <option value="" [selected]="!currentDevice">No Device Selected</option>
+                  <option value="" [selected]="!currentDevice" translate>No Device Selected</option>
                   <option *ngFor="let device of availableDevices" [value]="device.deviceId"
                     [selected]="currentDevice && device.deviceId === currentDevice.deviceId">{{device.label}}</option>
                 </select>

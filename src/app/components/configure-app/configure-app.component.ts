@@ -14,6 +14,7 @@ import {BehaviorSubject} from 'rxjs';
 import {RepresentativeService} from '../../services/representative.service';
 import {NinjaService} from '../../services/ninja.service';
 import {QrModalService} from '../../services/qr-modal.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-configure-app',
@@ -37,7 +38,8 @@ export class ConfigureAppComponent implements OnInit {
     private util: UtilService,
     private price: PriceService,
     private ninja: NinjaService,
-    private qrModalService: QrModalService) { }
+    private qrModalService: QrModalService,
+    private translate: TranslateService) { }
   wallet = this.walletService.wallet;
 
   denominations = [
@@ -52,6 +54,12 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'None', value: 'none' },
   ];
   selectedStorage = this.storageOptions[0].value;
+
+  languages = [
+    { name: 'English', value: 'en' },
+    { name: '日本語', value: 'ja' },
+  ];
+  selectedLanguage = this.languages[0].value;
 
   currencies = [
     { name: 'None', value: '' },
@@ -211,6 +219,9 @@ export class ConfigureAppComponent implements OnInit {
   loadFromSettings() {
     const settings = this.appSettings.settings;
 
+    const matchingLanguage = this.languages.find(d => d.value === settings.displayLanguage);
+    this.selectedLanguage = matchingLanguage.value || this.languages[0].value;
+
     const matchingCurrency = this.currencies.find(d => d.value === settings.displayCurrency);
     this.selectedCurrency = matchingCurrency.value || this.currencies[0].value;
 
@@ -241,10 +252,15 @@ export class ConfigureAppComponent implements OnInit {
   }
 
   async updateDisplaySettings() {
+    const newLanguage = this.selectedLanguage;
     const newCurrency = this.selectedCurrency;
     // const updatePrefixes = this.appSettings.settings.displayPrefix !== this.selectedPrefix;
     const reloadFiat = this.appSettings.settings.displayCurrency !== newCurrency;
     this.notifications.sendSuccess(`App display settings successfully updated!`);
+
+    this.appSettings.setAppSetting('displayLanguage', newLanguage);
+    this.translate.setDefaultLang(newLanguage);
+    this.translate.use(newLanguage);
 
     if (reloadFiat) {
       // Reload prices with our currency, then call to reload fiat balances.

@@ -4,7 +4,7 @@
     <div class="uk-margin-bottom" uk-grid>
       <div class="uk-width-expand@s uk-width-1-1">
         <h2 class="uk-heading-divider">
-          Accounts
+          <span translate>Accounts</span>
           <a (click)="viewAdvanced = !viewAdvanced" style="font-size: 12px; margin-left: 25px;">{{ viewAdvanced ? 'BASIC' : 'ADVANCED' }}</a>
         </h2>
       </div>
@@ -15,7 +15,7 @@
           </div>
           <div class="uk-width-auto@m">
             <button class="uk-button uk-button-secondary uk-width-1-1@m" (click)="createAccount()">
-              Add New Account
+              <span translate>Add New Account</span>
             </button>
           </div>
         </div>
@@ -26,10 +26,8 @@
       <table class="uk-table uk-table-striped uk-table-small">
         <thead>
         <tr>
-          <th scope="col" class="uk-width-3-5@m uk-width-1-2">
-            Account
-          </th>
-          <th scope="col" class="uk-width-1-5@m uk-width-1-4 uk-text-right">Balance</th>
+          <th scope="col" class="uk-width-3-5@m uk-width-1-2" translate>Account</th>
+          <th scope="col" class="uk-width-1-5@m uk-width-1-4 uk-text-right" translate>Balance</th>
           <th scope="col" class="uk-width-1-5@m uk-width-1-4 uk-text-right"></th>
         </tr>
         </thead>
@@ -85,7 +83,7 @@
       </table>
     </div>
 
-    <p class="uk-text-center uk-text-small">Click on an account to view more details!</p>
+    <p class="uk-text-center uk-text-small" translate>Click on an account to view more details!</p>
 
   </div>
 </div>

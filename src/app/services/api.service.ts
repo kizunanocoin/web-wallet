@@ -57,10 +57,10 @@ export class ApiService {
     return await this.request('accounts_frontiers', { accounts });
   }
   async accountsPending(accounts: string[], count: number = 50): Promise<{blocks: any }> {
-    return await this.request('accounts_pending', { accounts, count, source: true, include_only_confirmed: true });
+    return await this.request('accounts_pending', { accounts, count, source: true, include_only_confirmed: false });
   }
   async accountsPendingLimit(accounts: string[], threshold: string, count: number = 50): Promise<{blocks: any }> {
-    return await this.request('accounts_pending', { accounts, count, threshold, source: true, include_only_confirmed: true });
+    return await this.request('accounts_pending', { accounts, count, threshold, source: true, include_only_confirmed: false });
   }
   async delegatorsCount(account: string): Promise<{ count: string }> {
     return await this.request('delegators_count', { account });
