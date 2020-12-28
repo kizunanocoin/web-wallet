@@ -5,7 +5,7 @@
       <div class="uk-width-expand@s uk-width-1-1">
         <h2 class="uk-heading-divider">
           <span translate>Address Book</span>
-          <a (click)="activePanel =  activePanel === 0 ? 2 : 0;" style="font-size: 12px; margin-left: 25px;">{{ activePanel === 2 ? 'ADDRESS BOOK' : 'IMPORT / EXPORT' }}</a>
+          <a (click)="activePanel =  activePanel === 0 ? 2 : 0;" style="font-size: 12px; margin-left: 25px;">{{ (activePanel === 2 ? 'ADDRESS BOOK' : 'IMPORT / EXPORT') | translate }}</a>
         </h2>
       </div>
       <div class="uk-width-auto@s uk-width-1-1 uk-text-right">

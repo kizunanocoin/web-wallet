@@ -3,10 +3,10 @@
     
     <div class="uk-margin-bottom" uk-grid>
       <div class="uk-width-expand@s uk-width-1-1">
-        <h2 class="uk-heading-divider">Representatives Overview</h2>
+        <h2 class="uk-heading-divider" translate>Representatives Overview</h2>
       </div>
       <div class="uk-width-auto@s uk-width-1-1 uk-text-right">
-        <a routerLink="/manage-representatives" class="uk-button uk-button-secondary uk-align-right uk-width-auto@s">Manage Known Reps</a>
+        <a routerLink="/manage-representatives" class="uk-button uk-button-secondary uk-align-right uk-width-auto@s" translate>Manage Known Reps</a>
       </div>
     </div>
 
@@ -16,15 +16,15 @@
 
         <div class="uk-card uk-card-default" *ngIf="!hideOverview">
           <div class="uk-card-body uk-padding-remove-bottom">
-            <p class="uk-text-lead uk-text-center">You have delegated voting weight to the following representatives</p>
+            <p class="uk-text-lead uk-text-center" translate>You have delegated voting weight to the following representatives</p>
 
 
             <ul class="uk-list uk-list-striped" style="margin-bottom: 0;">
               <li style="background: #fff; border-bottom: 0;">
                 <div uk-grid style="color: #999; text-transform: uppercase; font-size: .875rem; font-weight: 400;">
-                  <div class="uk-width-1-5">Status</div>
-                  <div class="uk-width-expand">Representative</div>
-                  <div class="uk-width-1-4">Weight</div>
+                  <div class="uk-width-1-5" translate>Status</div>
+                  <div class="uk-width-expand" translate>Representative</div>
+                  <div class="uk-width-1-4" translate>Weight</div>
                 </div>
               </li>
             </ul>
@@ -66,17 +66,17 @@
         <div class="uk-card uk-card-default">
           <div class="uk-card-body" style="padding-bottom: 0;">
 
-            <p class="uk-text-lead uk-text-center">Change your representatives</p>
+            <p class="uk-text-lead uk-text-center" translate>Change your representatives</p>
 
 
             <div class="uk-form-horizontal">
 
               <div class="uk-margin">
-                <label class="uk-form-label" for="form-horizontal-select">Accounts to Change</label>
+                <label class="uk-form-label" for="form-horizontal-select" translate>Accounts to Change</label>
                 <div class="uk-form-controls">
                   <select class="uk-select" [(ngModel)]="changeAccountID" (change)="newAccountID()" id="form-horizontal-select">
-                    <option [value]="null">Select Accounts to Change</option>
-                    <option [value]="'all'">All Current Accounts</option>
+                    <option [value]="null" translate>Select Accounts to Change</option>
+                    <option [value]="'all'" translate>All Current Accounts</option>
                     <option *ngFor="let account of wallet.wallet.accounts" [value]="account.id">{{account.addressBookName ? account.addressBookName + ' - ' : '#' + account.index + ' - ' }} {{ account.id | squeeze }} ({{ account.balance | rai: settings.settings.displayDenomination }})</option>
                   </select>
                   <ul class="uk-list uk-list-striped">
@@ -98,7 +98,7 @@
               </div>
 
               <div class="uk-margin">
-                <label class="uk-form-label" for="form-horizontal-text2">New Representative</label>
+                <label class="uk-form-label" for="form-horizontal-text2" translate>New Representative</label>
                 <div class="uk-form-controls">
                   <div class="uk-inline uk-width-1-1">
                     <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('rep1','account')" uk-tooltip title="Scan from QR code"></a>
@@ -106,7 +106,7 @@
 
                     <div *ngIf="(representativeResults$ | async).length" [hidden]="!showRepresentatives" class="uk-animation-slide-down-small uk-width-1-1 uk-card uk-card-default uk-card-body uk-position-absolute" style="z-index: 15000">
                       <ul class="uk-nav uk-nav-default">
-                        <li class="uk-nav-header">Representative List Results</li>
+                        <li class="uk-nav-header" translate>Representative List Results</li>
                         <li class="uk-nav-divider"></li>
                         <li *ngFor="let rep of representativeResults$ | async">
                           <a (click)="selectRepresentative(rep.id)">
@@ -127,67 +127,18 @@
                   </div>
                 </div>
 
-                <div class="uk-form-controls">
-                  <div class="uk-inline uk-width-1-1 uk-margin-top">
-                    <button class="uk-button uk-button-default uk-button-small" *ngIf="showRecommendedReps" (click)="showRecommendedReps = !showRecommendedReps"><span uk-icon="icon: minus; ratio: 0.8" style="margin-right: 5px;"></span> Hide Recommended Representatives</button>
-                    <button class="uk-button uk-button-primary uk-button-small" *ngIf="!showRecommendedReps" (click)="showRecommendedReps = !showRecommendedReps"><span uk-icon="icon: plus; ratio: 0.8" style="margin-right: 5px;"></span> View Recommended Representatives</button>
-                  </div>
-                </div>
+                <!--<div class="uk-form-controls">-->
+                  <!--<div class="uk-inline uk-width-1-1 uk-margin-top">-->
+                    <!--<button class="uk-button uk-button-default uk-button-small" *ngIf="showRecommendedReps" (click)="showRecommendedReps = !showRecommendedReps"><span uk-icon="icon: minus; ratio: 0.8" style="margin-right: 5px;"></span> Hide Recommended Representatives</button>-->
+                    <!--<button class="uk-button uk-button-primary uk-button-small" *ngIf="!showRecommendedReps" (click)="showRecommendedReps = !showRecommendedReps"><span uk-icon="icon: plus; ratio: 0.8" style="margin-right: 5px;"></span> View Recommended Representatives</button>-->
+                  <!--</div>-->
+                <!--</div>-->
               </div>
-
-              <div *ngIf="showRecommendedReps">
-                <hr>
-
-                <div class="uk-margin">
-                  <p class="uk-text-lead uk-text-center">Select a representative recommended by <a href="https://mynano.ninja" target="_blank" rel="noopener noreferrer" class="uk-link-text">MyNanoNinja</a></p>
-                  <!--<h4>Or, Select a recommended representative</h4>-->
-                  <ul class="uk-list uk-list-striped" style="margin-bottom: 0;">
-                    <li style="background: #fff; border-bottom: 0;">
-                      <div uk-grid style="color: #999; text-transform: uppercase; font-size: .875rem; font-weight: 400;">
-                        <div class="uk-width-expand">Representative</div>
-                        <div class="uk-width-1-2">Weight / Uptime / Accounts</div>
-                        <!--<div class="uk-width-1-5">Uptime / Delegators</div>-->
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="uk-list uk-list-striped" style="margin-top: 0;">
-                    <li *ngIf="recommendedRepsLoading" class="uk-text-center">
-                      <span uk-icon="load"></span> Loading reps...
-                    </li>
-                    <li *ngIf="recommendedRepsLoading === null" class="uk-text-center">
-                      <span uk-icon="load"></span> Unable to load representatives from My Nano Ninja
-                    </li>
-                    <li *ngFor="let rep of recommendedRepsPaginated">
-                      <div uk-grid >
-                        <div class="uk-width-expand" (click)="selectRecommendedRep(rep)" style="cursor: pointer;">
-                          <span class="uk-badge" uk-tooltip title="My Nano Ninja Score" style="margin-right: 4px;">{{ rep.score }}</span> <span uk-tooltip title="Select this representative">{{ rep.alias }}</span>
-
-                        </div>
-                        <div class="uk-width-1-2">
-                          <a [href]="'https://mynano.ninja/account/' + rep.account" target="_blank" rel="noopener noreferrer" style="float: right;" uk-tooltip title="View more details on My Nano Ninja" class="uk-link-muted"><span uk-icon="search"></span></a>
-
-                          <span style="display: inline-block; margin-right: 15px;" uk-tooltip title="Percentage of network voting weight delegated" class="uk-text-primary"><span uk-icon="users"></span> {{ rep.percent }}%</span>
-                          <span style="display: inline-block; margin-right: 15px; color: #13ab60;" uk-tooltip title="Uptime since creation" class=""><span uk-icon="bolt"></span> {{ rep.uptime.toFixed(2) }}%</span>
-
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <a href="https://mynano.ninja" target="_blank" rel="noopener noreferrer" style="float: right;" class="uk-link-muted" uk-tooltip title="View all verified representatives on MyNanoNinja">View All</a>
-                  <ul class="uk-pagination uk-flex-center">
-                    <li><a (click)="previousReps()" uk-tooltip title="Previous Page"><span uk-pagination-previous></span></a></li>
-                    <li>Showing {{ (currentRepPage * repsPerPage)+ 1 }} - {{ (currentRepPage * repsPerPage)+ repsPerPage }} of {{ recommendedReps.length }} reps</li>
-                    <li><a (click)="nextReps()" uk-tooltip title="Next Page"><span uk-pagination-next></span></a></li>
-                  </ul>
-                </div>
-
-              </div>
-
 
             </div>
           </div>
           <div class="uk-card-footer">
-            <button class="uk-button uk-button-primary uk-width-1-1" type="button" (click)="changeRepresentatives()" *ngIf="!changingRepresentatives">Update Representatives</button>
+            <button class="uk-button uk-button-primary uk-width-1-1" type="button" (click)="changeRepresentatives()" *ngIf="!changingRepresentatives" translate>Update Representatives</button>
             <button class="uk-button uk-button-primary uk-width-1-1 uk-disabled" type="button" *ngIf="changingRepresentatives"><span uk-spinner></span> Updating Representatives...</button>
           </div>
       </div>

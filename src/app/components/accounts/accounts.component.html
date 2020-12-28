@@ -5,7 +5,7 @@
       <div class="uk-width-expand@s uk-width-1-1">
         <h2 class="uk-heading-divider">
           <span translate>Accounts</span>
-          <a (click)="viewAdvanced = !viewAdvanced" style="font-size: 12px; margin-left: 25px;">{{ viewAdvanced ? 'BASIC' : 'ADVANCED' }}</a>
+          <a (click)="viewAdvanced = !viewAdvanced" style="font-size: 12px; margin-left: 25px;">{{ (viewAdvanced ? 'BASIC' : 'ADVANCED') | translate }}</a>
         </h2>
       </div>
       <div class="uk-width-auto@m uk-width-1-1 uk-text-right">

@@ -44,13 +44,13 @@ export class ConfigureWalletComponent implements OnInit {
 
   selectedImportOption = 'seed';
   importOptions = [
-    { name: 'KIZUNANO COIN Seed', value: 'seed' },
-    { name: 'KIZUNANO COIN Mnemonic Phrase', value: 'mnemonic' },
-    { name: 'BIP39 Mnemonic Phrase', value: 'bip39-mnemonic' },
-    { name: 'KIZUNANO WALLET File', value: 'file' },
-    { name: 'Ledger Nano S / Nano X', value: 'ledger' },
-    { name: 'Private Key', value: 'privateKey' },
-    { name: 'Expanded Private Key', value: 'expandedKey' },
+    { name: 'KIZUNANO WALLET Seed', value: 'seed' },
+    { name: 'KIZUNANO WALLET Mnemonic Phrase', value: 'mnemonic' },
+    //{ name: 'BIP39 Mnemonic Phrase', value: 'bip39-mnemonic' },
+    //{ name: 'KIZUNANO WALLET File', value: 'file' },
+    //{ name: 'Ledger Nano S / Nano X', value: 'ledger' },
+    //{ name: 'Private Key', value: 'privateKey' },
+    //{ name: 'Expanded Private Key', value: 'expandedKey' },
   ];
 
   ledgerStatus = LedgerStatus;

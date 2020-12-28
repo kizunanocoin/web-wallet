@@ -1,17 +1,17 @@
-<h2 class="uk-heading-divider">Configure Wallet</h2>
-<p *ngIf="activePanel === panels.create || activePanel === panels.import">Use the options below to import an existing wallet or create a new one</p>
+<h2 class="uk-heading-divider" translate>Configure Wallet</h2>
+<p *ngIf="activePanel === panels.create || activePanel === panels.import" translate>Use the options below to import an existing wallet or create a new one</p>
 
 <div *ngIf="isConfigured() && (activePanel === panels.create || activePanel === panels.import)" class="uk-alert uk-alert-danger">
-  <b>You already have a local KIZUNANO WALLET wallet configured</b><br>
-  Before going any further, be 100% certain you have backed up the seed to your current wallet!<br>
-  Without it, <b>any funds you have will become completely unrecoverable!</b>
+  <b translate>You already have a local KIZUNANO WALLET wallet configured</b><br>
+  <span translate>Before going any further, be 100% certain you have backed up the seed to your current wallet!</span><br>
+  <b translate>Without it, any funds you have will become completely unrecoverable!</b>
 </div>
 
 <div uk-grid *ngIf="activePanel === panels.create || activePanel === panels.import">
   <div class="uk-width-1-1">
     <div class="uk-button-group uk-width-1-1">
-      <button (click)="setPanel(0)" class="uk-button uk-width-1-2" [ngClass]="{ 'uk-button-primary': activePanel === panels.create, 'uk-button-secondary': activePanel !== panels.create }">Create New Wallet</button>
-      <button (click)="setPanel(1)" class="uk-button uk-width-1-2" [ngClass]="{ 'uk-button-primary': activePanel === panels.import, 'uk-button-secondary': activePanel !== panels.import }">Import Existing Wallet</button>
+      <button (click)="setPanel(0)" class="uk-button uk-width-1-2" [ngClass]="{ 'uk-button-primary': activePanel === panels.create, 'uk-button-secondary': activePanel !== panels.create }" translate>Create New Wallet</button>
+      <button (click)="setPanel(1)" class="uk-button uk-width-1-2" [ngClass]="{ 'uk-button-primary': activePanel === panels.import, 'uk-button-secondary': activePanel !== panels.import }" translate>Import Existing Wallet</button>
     </div>
   </div>
 </div>
@@ -23,11 +23,11 @@
       on KIZUNANO COIN network.  Your KIZUNANO COIN seed is the master key to all of your accounts and any money inside of them!
     </p>
     <div class="uk-alert-primary" uk-alert>
-      <p>Make sure you back up your seed, write it down, and keep it incredibly safe! All funds inside can be lost without it!</p>
+      <p translate>Make sure you back up your seed, write it down, and keep it incredibly safe! All funds inside can be lost without it!</p>
     </div>
   </div>
   <div class="uk-card-footer uk-text-right">
-    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()">Create Wallet</button>
+    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()" translate>Create Wallet</button>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
       <div class="uk-width-1-1">
         <div class="uk-form-horizontal">
           <div class="uk-margin">
-            <label class="uk-form-label" for="form-horizontal-select">Select Import Type</label>
+            <label class="uk-form-label" for="form-horizontal-select" translate>Select Import Type</label>
             <div class="uk-form-controls">
               <select class="uk-select" [(ngModel)]="selectedImportOption" id="form-horizontal-select" (change)="onMethodChange(selectedImportOption)">
                 <option *ngFor="let option of importOptions" [value]="option.value">{{ option.name }}</option>
@@ -57,16 +57,12 @@
 
     <div uk-grid *ngIf="selectedImportOption === 'file'">
       <div class="uk-width-1-1">
-        <p>
-          If you have saved your wallet to a file using KIZUNANO COIN before, use the button below to import it.
-        </p>
+        <p translate>If you have saved your wallet to a file using KIZUNANO COIN before, use the button below to import it.</p>
       </div>
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'seed'" class="uk-margin-top">
       <div class="uk-width-1-1">
-        <p>
-          Enter your seed from any KIZUNANO WALLET to import it below.
-        </p>
+        <p translate>Enter your seed from any KIZUNANO WALLET to import it below.</p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('seed1','hash')" uk-tooltip title="Scan from QR code"></a>
           <input type="text" class="uk-input" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedModel" placeholder="64 character KIZUNANO COIN Backup Seed">
@@ -75,9 +71,7 @@
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'mnemonic'" class="uk-margin-top">
       <div class="uk-width-1-1">
-        <p>
-          Enter your mnemonic generated from KIZUNANO WALLET. If it came from a Ledger device or certain multi-currency wallets, use "BIP39 Mnemonic" import type instead.
-        </p>
+        <p translate>Enter your mnemonic generated from KIZUNANO WALLET.</p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('mnemo1','mnemonic')" uk-tooltip title="Scan from QR code"></a>
           <textarea class="uk-textarea" rows="3" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedMnemonicModel" placeholder="24-words mnemonic"></textarea>
@@ -86,9 +80,7 @@
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'bip39-mnemonic'" class="uk-margin-top">
       <div class="uk-width-1-1">
-        <p>
-          Enter your mnemonic generated from a Ledger device or certain multi-currency wallets. If it was generated in KIZUNANO WALLET, use "KIZUNANO COIN Mnemonic" import type instead.
-        </p>
+        <p translate>Enter your mnemonic generated from a Ledger device or certain multi-currency wallets. If it was generated in KIZUNANO WALLET, use "KIZUNANO COIN Mnemonic" import type instead.</p>
         <div class="uk-form-horizontal">
           <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-select">BIP39 Mnemonic</label>
@@ -125,24 +117,22 @@
           <br>
         </p>
         <div *ngIf="ledger.status === ledgerStatus.NOT_CONNECTED" class="uk-alert uk-alert-warning">
-          <b>Ledger Device Not Connected</b><br>
+          <b translate>Ledger Device Not Connected</b><br>
           Connect your ledger device via USB and make sure you have the KIZUNANO COIN app installed, then press the button below to retry
         </div>
         <div *ngIf="ledger.status === ledgerStatus.LOCKED" class="uk-alert uk-alert-warning">
-          <b>Ledger Device Locked</b><br>
+          <b translate>Ledger Device Locked</b><br>
           Unlock your Ledger device, then press the button below to retry
         </div>
         <div *ngIf="ledger.status === ledgerStatus.READY" class="uk-alert uk-alert-success">
-          <b>Ledger Device Ready</b><br>
+          <b translate>Ledger Device Ready</b><br>
           Press the import button below to use your ledger wallet
         </div>
       </div>
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'privateKey'" class="uk-margin-top">
       <div class="uk-width-1-1">
-        <p>
-          Enter your KIZUNANO COIN private key below. These are not to be confused with KIZUNANO COIN seeds, which are more common, and produce many private keys.
-        </p>
+        <p translate>Enter your KIZUNANO COIN private key below. These are not to be confused with KIZUNANO COIN seeds, which are more common, and produce many private keys.</p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('priv1','hash')" uk-tooltip title="Scan from QR code"></a>
           <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importPrivateKeyModel" placeholder="64 character KIZUNANO COIN Private Key">
@@ -151,9 +141,7 @@
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'expandedKey'" class="uk-margin-top">
       <div class="uk-width-1-1">
-        <p>
-          Enter your expanded private key below. These are rare, and are usually generated from multi-party cryptography magic.
-        </p>
+        <p translate>Enter your expanded private key below. These are rare, and are usually generated from multi-party cryptography magic.</p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('expanded1','hash')" uk-tooltip title="Scan from QR code"></a>
           <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importExpandedKeyModel" placeholder="64 or 128 character KIZUNANO COIN Expanded Private Key">
@@ -164,15 +152,15 @@
   <div class="uk-card-footer uk-text-right">
     <div *ngIf="selectedImportOption === 'file'" class="js-upload uk-width-auto@s uk-width-1-1" uk-form-custom style="display: inline-block;">
       <input type="file" id="import-from-file" (change)="importFromFile($event.target.files)" multiple>
-      <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" type="button" tabindex="-1">Import From File</button>
+      <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" type="button" tabindex="-1" translate>Import From File</button>
     </div>
-    <button *ngIf="selectedImportOption === 'mnemonic'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()">Import From Mnemonic</button>
-    <button *ngIf="selectedImportOption === 'bip39-mnemonic'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" [disabled]="!validIndex" (click)="setPasswordInit()">Import From Mnemonic</button>
-    <button *ngIf="selectedImportOption === 'seed'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()">Import From Seed</button>
-    <button *ngIf="selectedImportOption === 'ledger' && ledger.status === ledgerStatus.READY" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="importLedgerWallet()">Import From Ledger</button>
-    <button *ngIf="selectedImportOption === 'ledger' && ledger.status !== ledgerStatus.READY" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="importLedgerWallet(true)">Refresh Ledger Status</button>
-    <button *ngIf="selectedImportOption === 'privateKey'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()">Import From Private Key</button>
-    <button *ngIf="selectedImportOption === 'expandedKey'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()">Import From Expanded Private Key</button>
+    <button *ngIf="selectedImportOption === 'mnemonic'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()" translate>Import From Mnemonic</button>
+    <button *ngIf="selectedImportOption === 'bip39-mnemonic'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" [disabled]="!validIndex" (click)="setPasswordInit()" translate>Import From Mnemonic</button>
+    <button *ngIf="selectedImportOption === 'seed'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()" translate>Import From Seed</button>
+    <button *ngIf="selectedImportOption === 'ledger' && ledger.status === ledgerStatus.READY" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="importLedgerWallet()" translate>Import From Ledger</button>
+    <button *ngIf="selectedImportOption === 'ledger' && ledger.status !== ledgerStatus.READY" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="importLedgerWallet(true)" translate>Refresh Ledger Status</button>
+    <button *ngIf="selectedImportOption === 'privateKey'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()" translate>Import From Private Key</button>
+    <button *ngIf="selectedImportOption === 'expandedKey'" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" (click)="setPasswordInit()" translate>Import From Expanded Private Key</button>
   </div>
 </div>
 
@@ -180,12 +168,10 @@
 
 <div class="uk-card uk-card-default" *ngIf="activePanel === panels.backup">
   <div class="uk-card-header">
-    <h3 class="uk-card-title">Save Wallet Backup</h3>
+    <h3 class="uk-card-title" translate>Save Wallet Backup</h3>
   </div>
   <div class="uk-card-body">
-    <p>
-      Below is the seed and mnemonic backup. You can use whichever you prefer in any other compatible wallet.
-    </p>
+    <p translate>Below is the seed and mnemonic backup. You can use whichever you prefer in any other compatible wallet.</p>
     <div class="uk-alert-danger uk-alert-primary">
       Make sure to write down your seed and/or mnemonic or save it somewhere safe, and <strong>never share it with anyone!</strong><br>
       It is the master key to all of your accounts, and the only way to recover your funds in an emergency.<br>
@@ -193,22 +179,20 @@
     <br>
 
     <div uk-grid>
-      <div class="uk-width-1-4">KIZUNANO COIN Seed</div>
+      <div class="uk-width-1-4" translate>KIZUNANO WALLET Seed</div>
       <div class="uk-width-3-4 uk-text-truncate">
         {{ newWalletSeed }}<br>
-        <a title="Copy Seed To Clipboard" ngxClipboard [cbContent]="newWalletSeed" (cbOnSuccess)="copied()" uk-tooltip>Copy seed to clipboard</a>
+        <a title="Copy Seed To Clipboard" ngxClipboard [cbContent]="newWalletSeed" (cbOnSuccess)="copied()" uk-tooltip translate>Copy seed to clipboard</a>
       </div>
     </div>
 
     <hr class="uk-divider-icon">
 
     <div uk-grid>
-      <div class="uk-width-1-4@m">
-        KIZUNANO COIN Mnemonic<br>
-      </div>
+      <div class="uk-width-1-4@m" translate>KIZUNANO WALLET Mnemonic</div>
       <div class="uk-width-3-4@m">
         <pre class="mne-box"><span *ngFor="let line of newWalletMnemonicLines; let l = index" class="mne-cont"><span *ngFor="let word of line; let i = index" class="mne-word"><span class="mne-num">{{ (l * 4) + i + 1 }}</span> {{ word }}</span></span></pre>
-        <a title="Copy Mnemonic To Clipboard" ngxClipboard [cbContent]="newWalletMnemonic" (cbOnSuccess)="copied()" uk-tooltip>Copy mnemonic to clipboard</a>
+        <a title="Copy Mnemonic To Clipboard" ngxClipboard [cbContent]="newWalletMnemonic" (cbOnSuccess)="copied()" uk-tooltip translate>Copy mnemonic to clipboard</a>
       </div>
     </div>
   </div>
@@ -216,28 +200,24 @@
     <div class="uk-width-1-1">
       <label style="cursor: pointer;"><input type="checkbox" class="uk-checkbox" [(ngModel)]="hasConfirmedBackup"> &nbsp; I have securely stored the seed and/or mnemonic</label>
     </div>
-    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" id="create-wallet" [disabled]="!hasConfirmedBackup" (click)="confirmNewSeed()">CREATE WALLET</button>
+    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" id="create-wallet" [disabled]="!hasConfirmedBackup" (click)="confirmNewSeed()" translate>CREATE WALLET</button>
   </div>
 </div>
 
 <div class="uk-card uk-card-default" *ngIf="activePanel === panels.password">
   <div class="uk-card-header">
-    <h3 class="uk-card-title">Set Wallet Password</h3>
+    <h3 class="uk-card-title" translate>Set Wallet Password</h3>
   </div>
   <div class="uk-card-body">
-    <p>
-      Your password is used to encrypt the sensitive parts of
-      your wallet when it is locked, which disables sending, receiving, creating accounts, and other operations.
-    </p>
+    <p translate>Your password is used to encrypt the sensitive parts of your wallet when it is locked, which disables sending, receiving, creating accounts, and other operations.</p>
 
-    <p>
-      For the safety of your funds, use a secure (green) password.
-    </p>
+    <p translate>For the safety of your funds, use a secure (green) password.</p>
+
     <div uk-grid>
       <div class="uk-width-1-2@m">
         <input type="password" class="uk-input" [(ngModel)]="walletPasswordModel" placeholder="New Wallet Password">
         <password-strength-meter *ngIf="walletPasswordModel.length > 0" [password]="walletPasswordModel" [enableFeedback]="true" [minPasswordLength]="6"></password-strength-meter>
-        <span class="password-helper" *ngIf="walletPasswordModel.length > 0 && walletPasswordModel.length < 6">Password must be at least 6 characters long</span>
+        <span class="password-helper" *ngIf="walletPasswordModel.length > 0 && walletPasswordModel.length < 6" translate>Password must be at least 6 characters long</span>
         <span class="password-helper" *ngIf="walletPasswordConfirmModel.length >= 6 && walletPasswordModel !== walletPasswordConfirmModel">Passwords do not match!</span>
       </div>
       <div class="uk-width-1-2@m">
@@ -246,13 +226,13 @@
     </div>
   </div>
   <div class="uk-card-footer uk-text-right">
-    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" [disabled]="walletPasswordModel.length < 6 || (walletPasswordModel !== walletPasswordConfirmModel)" (click)="saveWalletPassword()">{{isNewWallet ? 'Next':'Import Wallet'}}</button>
+    <button class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" [disabled]="walletPasswordModel.length < 6 || (walletPasswordModel !== walletPasswordConfirmModel)" (click)="saveWalletPassword()">{{ (isNewWallet ? 'Next':'Import Wallet') | translate }}</button>
   </div>
 </div>
 
 <div class="uk-card uk-card-default" *ngIf="activePanel === panels.final">
   <div class="uk-card-header">
-    <h3 class="uk-card-title">Wallet Created!</h3>
+    <h3 class="uk-card-title" translate>Wallet Created!</h3>
   </div>
   <div class="uk-card-body">
     <p>
@@ -261,13 +241,13 @@
     </p>
   </div>
   <div class="uk-card-footer uk-text-right">
-    <button routerLink="/accounts" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1">View Accounts</button>
+    <button routerLink="/accounts" class="uk-button uk-button-primary uk-width-auto@s uk-width-1-1" translate>View Accounts</button>
   </div>
 </div>
 
 <div *ngIf="activePanel === panels.final && !walletService.isLedgerWallet()" class="uk-alert-primary" uk-alert>
-  <p><strong>ProTip:</strong> If you lose your password, you can always restore your wallet using your seed or mnemonic you were given.</p>
+  <p><strong translate>ProTip:</strong> If you lose your password, you can always restore your wallet using your seed or mnemonic you were given.</p>
 </div>
 <div *ngIf="activePanel === panels.final && walletService.isLedgerWallet()" class="uk-alert-primary" uk-alert>
-  <p><strong>ProTip:</strong> Press the Ledger status bar on the left side to reload your Ledger when connecting or disconnecting it.</p>
+  <p><strong translate>ProTip:</strong> Press the Ledger status bar on the left side to reload your Ledger when connecting or disconnecting it.</p>
 </div>

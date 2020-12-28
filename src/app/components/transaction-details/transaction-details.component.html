@@ -1,23 +1,21 @@
 <div class="uk-animation-slide-left-small" uk-grid>
   <div class="uk-width-1-1">
-    <h2 class="uk-heading-divider">Transaction Details</h2>
+    <h2 class="uk-heading-divider" translate>Transaction Details</h2>
 
-    <div class="uk-alert uk-alert-primary" *ngIf="!transaction">
-      Unable to load the transaction, double check that the hash is correct and try again!
-    </div>
+    <div class="uk-alert uk-alert-primary" *ngIf="!transaction" translate>Unable to load the transaction, double check that the hash is correct and try again!</div>
 
     <div class="uk-width-1-1" *ngIf="transaction">
       <div class="uk-card uk-card-default uk-width-1-1 uk-text-center" *ngIf="blockType !== 'change'">
         <span style="display: block; padding-top: 8px;">
-          <span *ngIf="blockType == 'send'">Send</span>
-          <span *ngIf="blockType == 'open'">Receive</span>
-          <span *ngIf="blockType == 'receive'">Receive</span>
+          <span *ngIf="blockType == 'send'" translate>Send</span>
+          <span *ngIf="blockType == 'open'" translate>Receive</span>
+          <span *ngIf="blockType == 'receive'" translate>Receive</span>
         </span>
         <span style="display:block; font-size: 32px;">{{ transaction?.amount | rai: settings.settings.displayDenomination }}</span>
         <span *ngIf="amountRaw.gt(0)" style="display:block; font-size: 12px;">+{{ amountRaw.toString(10) }} raw</span>
       </div>
       <div class="uk-card uk-card-default uk-width-1-1 uk-text-center" *ngIf="blockType == 'change'">
-        <span style="display:block; font-size: 32px;">Change Representative</span>
+        <span style="display:block; font-size: 32px;" translate>Change Representative</span>
       </div>
       <br>
       <div uk-grid>
@@ -31,8 +29,8 @@
                   <span class="uk-label" *ngIf="fromAddressBook">{{ fromAddressBook }}</span> {{ fromAccountID }}
                 </a>
               </span>
-              <span class="confirm-subtitle" *ngIf="blockType != 'change'">From Account</span>
-              <span class="confirm-subtitle" *ngIf="blockType == 'change'">Account</span>
+              <span class="confirm-subtitle" *ngIf="blockType != 'change'" translate>From Account</span>
+              <span class="confirm-subtitle" *ngIf="blockType == 'change'" translate>Account</span>
             </div>
           </div>
         </div>
@@ -44,8 +42,8 @@
                   <span class="uk-label" *ngIf="toAddressBook">{{ toAddressBook }}</span> {{ toAccountID }}
                 </a>
               </span>
-              <span class="confirm-subtitle" *ngIf="blockType != 'change'">To Account</span>
-              <span class="confirm-subtitle" *ngIf="blockType == 'change'">New Representative</span>
+              <span class="confirm-subtitle" *ngIf="blockType != 'change'" translate>To Account</span>
+              <span class="confirm-subtitle" *ngIf="blockType == 'change'" translate>New Representative</span>
             </div>
           </div>
         </div>
@@ -56,69 +54,69 @@
       <div class="uk-card-body uk-padding-small uk-form-horizontal">
 
         <div class="uk-margin">
-          <label class="uk-form-label">Block:</label>
+          <label class="uk-form-label" translate>Block:</label>
           <div class="uk-form-controls uk-text-truncate">
             {{ hashID }}
           </div>
         </div>
         <div class="uk-margin">
-          <label class="uk-form-label">Type:</label>
+          <label class="uk-form-label" translate>Type:</label>
           <div class="uk-form-controls uk-text-truncate">
             {{ transaction?.contents?.type }}
           </div>
         </div>
         <div class="uk-margin">
-          <label class="uk-form-label">Date:</label>
+          <label class="uk-form-label" translate>Date:</label>
           <div class="uk-form-controls uk-text-truncate">
             <span *ngIf="transaction.local_timestamp">{{ transaction?.local_timestamp * 1000 | date: 'yyyy-MM-dd HH:mm' }}</span>
             <span *ngIf="!transaction.local_timestamp" class="uk-text-muted">N/A</span>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.balance">
-          <label class="uk-form-label">Balance:</label>
+          <label class="uk-form-label" translate>Balance:</label>
           <div class="uk-form-controls uk-text-truncate">
             {{ (isStateBlock ? getBalanceFromDec(transaction?.contents?.balance) : getBalanceFromHex(transaction?.contents?.balance)) | rai: settings.settings.displayDenomination }}<br>
             <span class="uk-text-small">{{ transaction?.contents?.balance }}</span>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.representative">
-          <label class="uk-form-label">Representative:</label>
+          <label class="uk-form-label" translate>Representative:</label>
           <div class="uk-form-controls uk-text-truncate">
             <a [routerLink]="'/account/' + transaction?.contents?.representative" class="uk-link-text" uk-tooltip title="View Account Details">{{ transaction?.contents?.representative }}</a>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.previous">
-          <label class="uk-form-label">Previous:</label>
+          <label class="uk-form-label" translate>Previous:</label>
           <div class="uk-form-controls uk-text-truncate">
             <a [routerLink]="'/transaction/' + transaction?.contents?.previous" class="uk-link-text" uk-tooltip title="View Block Details">{{ transaction?.contents?.previous }}</a>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.source">
-          <label class="uk-form-label">Source:</label>
+          <label class="uk-form-label" translate>Source:</label>
           <div class="uk-form-controls uk-text-truncate">
             <a [routerLink]="'/transaction/' + transaction?.contents?.source" class="uk-link-text" uk-tooltip title="View Block Details">{{ transaction?.contents?.source }}</a>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.link && blockType == 'receive'">
-          <label class="uk-form-label">Link (Source):</label>
+          <label class="uk-form-label" translate>Link (Source):</label>
           <div class="uk-form-controls uk-text-truncate">
             <a [routerLink]="'/transaction/' + transaction?.contents?.link" class="uk-link-text" uk-tooltip title="View Block Details">{{ transaction?.contents?.link }}</a>
           </div>
         </div>
         <div class="uk-margin" *ngIf="transaction?.contents?.link_as_account && blockType == 'send'">
-          <label class="uk-form-label">Link (Destination):</label>
+          <label class="uk-form-label" translate>Link (Destination):</label>
           <div class="uk-form-controls uk-text-truncate">
             <a [routerLink]="'/account/' + transaction?.contents?.link_as_account" class="uk-link-text" uk-tooltip title="View Account Details">{{ transaction?.contents?.link_as_account }}</a>
           </div>
         </div>
         <div class="uk-margin">
-          <label class="uk-form-label">Work:</label>
+          <label class="uk-form-label" translate>Work:</label>
           <div class="uk-form-controls uk-text-truncate">
             {{ transaction?.contents?.work }}
           </div>
         </div>
         <div class="uk-margin">
-          <label class="uk-form-label">Signature:</label>
+          <label class="uk-form-label" translate>Signature:</label>
           <div class="uk-form-controls uk-text-small uk-text-truncate">
             {{ transaction?.contents?.signature }}
           </div>
@@ -134,9 +132,7 @@
     </div>
 
     <div class="uk-card uk-card-default uk-margin" *ngIf="transaction && transactionJSON && showBlockData">
-      <div class="uk-card-header">
-        Raw Block Data
-      </div>
+      <div class="uk-card-header" translate>Raw Block Data</div>
       <div class="uk-card-body uk-padding-small uk-form-horizontal">
         <pre><code>{{ transactionJSON }}</code></pre>
       </div>
