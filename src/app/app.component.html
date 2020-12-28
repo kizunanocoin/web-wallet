@@ -220,7 +220,7 @@
         <div class="nav-search">
           <form class="uk-search uk-search-default uk-width-1-1">
             <a href="javascript:void(0)" (click)="performSearch()" class="uk-search-icon-flip" uk-search-icon></a>
-            <input class="uk-search-input uk-width-1-1" id="search-input" type="search" placeholder="Search for an account or block hash" [(ngModel)]="searchData" name="searchData" (keyup.enter)="performSearch()">
+            <input class="uk-search-input uk-width-1-1" id="search-input" type="search" placeholder="{{ 'Search for an account or block hash' | translate }}" [(ngModel)]="searchData" name="searchData" (keyup.enter)="performSearch()">
           </form>
         </div>
 

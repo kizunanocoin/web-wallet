@@ -18,6 +18,7 @@
   "App Settings":"アプリ設定",
   "Manage Wallet":"ウォレット管理",
   "Configure New Wallet":"新規ウォレット作成",
+  "Search for an account or block hash":"アカウント / ブロックハッシュを検索",
 
   "Ledger disconnected":"レジャー切断",
   "Ledger app was closed":"レジャーアプリ終了",
@@ -151,6 +152,7 @@
   "Server Configuration":"サーバー設定",
   "API Server":"APIサーバー",
   "WebSocket Server":"WebSocketサーバー",
+  "Auth Header":"認証ヘッダ",
   "Node Stats":"ノード状態",
   "Server":"サーバー",
   "Block Count":"ブロック値",

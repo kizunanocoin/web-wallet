@@ -18,6 +18,7 @@
   "App Settings":"App Settings",
   "Manage Wallet":"Manage Wallet",
   "Configure New Wallet":"Configure New Wallet",
+  "Search for an account or block hash":"Search for an account or block hash",
 
   "Ledger disconnected":"Ledger disconnected",
   "Ledger app was closed":"Ledger app was closed",
@@ -151,6 +152,7 @@
   "Server Configuration":"Server Configuration",
   "API Server":"API Server",
   "WebSocket Server":"WebSocket Server",
+  "Auth Header":"Auth Header",
   "Node Stats":"Node Stats",
   "Server":"Server",
   "Block Count":"Block Count",
