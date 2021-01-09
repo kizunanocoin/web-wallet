@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable()
 export class PriceService {
   storeKey = `nanovault-price`;
-  apiUrl = `https://api.coingecko.com/api/v3/coins/kizunacoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+  apiUrl = `https://coinutil.net/currency/price/kizunano-coin`;
 
   price = {
     lastPrice: 0,
@@ -23,6 +23,7 @@ export class PriceService {
     if (!response) {
       return this.price.lastPrice;
     }
+    console.log(response);
 
     const quote = response.market_data.current_price;
     const currencyPrice = quote[currency.toLowerCase()];
